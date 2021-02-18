@@ -12,3 +12,7 @@ function deb($v, $h=0){
     echo "</pre>";
     if($h) echo "<hr>";
 }
+
+?>
+
+<link rel="stylesheet" href="./style.css">
