@@ -2,6 +2,8 @@
   Options +FollowSymLinks
   RewriteEngine On
 
-RewriteRule ^category/([a-z0-9]+)/?$ home.php?cat=$1 [L]
+#RewriteRule ^category/([a-z0-9]+)/?$ index.php?cat=$1 [L]
+RewriteRule ^category/([a-zA-Zа-яА-ЯёЁ_0-9]+)/?$ index.php?cat=$1 [L]
+#RewriteRule ^category/([a-zа-яё_\s]+)/?$ index.php?cat=$1 [L]
 
 </IfModule>
