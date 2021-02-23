@@ -116,8 +116,11 @@ function thirtCatArray(){
 thirtCatArray();
 $sc = 0;
 foreach ($rootCats as $k => $i){
-    $sc +=count($i['secondCats']);
+    $sc +=count($i['childs']);
 }
+
+
+
 
 //deb($sc+count($rootCats));
 //deb($rootCats);

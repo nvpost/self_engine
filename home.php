@@ -3,7 +3,7 @@ require './cats.php';
 
 //deb($rootCats);
 
-print_r($_GET);
+
 
 foreach($rootCats as $key => $rootCat){
     drowShowCaseItem($rootCat);
@@ -21,8 +21,9 @@ function drowShowCaseItem($item){
         $itemHtml ."</div>";
 
         $itemHtml .= "<div class='show_case_item_img'>";
-            $itemHtml .= "<img src='https://picsum.photos/400/200'>";
-            //$itemHtml .= "<h2>".$item['img']."</h2>";
+            $img = addImgToCats($item['cat_id']);
+            deb($img);
+            $itemHtml .= "<img src='../../noz/web/img/".$img['url']."', title='Купить ".$img['title']."'>";
         $itemHtml ."</div>";
 
         $itemHtml .= "<div class='show_case_item_actions'>";
@@ -49,11 +50,3 @@ function drowShowCaseItem($item){
 require './debug_line.php';
 ?>
 
-<script>
-    function getImg(){
-        let res = await fetch('https://picsum.photos/400/200')
-        console.log(res.url)
-        return res.url
-    }
-
-</script>
