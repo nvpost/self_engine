@@ -2,8 +2,12 @@
 require './func.php';
 
 include_once('./classes/DataCache.php');
+include_once('./classes/Category.php');
+
 $start = microtime(true);
 
+$allCats = new Category($db);
+deb($allCats->getCatsFromId(0));
 
 // Название кеша - каталог с количеством
 $dataCache = new DataCache('catsAndCounts');
@@ -21,7 +25,7 @@ if ($getDataFromCache) {
 
     //Получаем список категорий
     //$cats = $db->query("SELECT * FROM category")->fetchAll(PDO::FETCH_ASSOC);
-    $cats_res = $db->query("SELECT * FROM category");
+    $cats_res = $db->query("SELECT * FROM category WHERE 1");
 
     $cats = array();
     while ($cat = $cats_res->fetch(PDO::FETCH_ASSOC))
@@ -32,33 +36,20 @@ if ($getDataFromCache) {
     }
 
 
-//    if   (mysql_num_rows($result) > 0){
-//        $cats = array();
-////В цикле формируем массив разделов, ключом будет id родительской категории, а также массив разделов, ключом будет id категории
-//        while($cat =  mysql_fetch_assoc($result)){
-//            $cats_ID[$cat['id']][] = $cat;
-//            $cats[$cat['parent_id']][$cat['id']] =  $cat;
-//        }
-//    }
-
-
-//    обходим категории и добавляем количество
-//    foreach ($cats as $key => $val){
-//        $cats[$key]['prods_count'] = addCountToCats($cats[$key]['cat_id']);
-//    }
-
 
 //     Обновляем данные в кэше
     $dataCache->updateCacheData($cats);
 }
 
+//deb($cats);
 
 
-function addCountToCats($category_id){
-    global $db;
-    $prod_count = $db->query("SELECT * FROM products WHERE category_id = $category_id")->rowCount();
-    return $prod_count;
-}
+
+//function addCountToCats($category_id){
+//    global $db;
+//    $prod_count = $db->query("SELECT * FROM products WHERE category_id = $category_id")->rowCount();
+//    return $prod_count;
+//}
 
 
 
@@ -94,7 +85,9 @@ foreach ($rootCats as $k => $i) {
 }
 
 
-
+/// Третие категории
+/// ////////////
+///
 
 function thirtCatArray(){
     global $cats;
@@ -116,8 +109,11 @@ function thirtCatArray(){
 thirtCatArray();
 $sc = 0;
 foreach ($rootCats as $k => $i){
-    $sc +=count($i['secondCats']);
+    $sc +=count($i['childs']);
 }
+
+
+
 
 //deb($sc+count($rootCats));
 //deb($rootCats);
