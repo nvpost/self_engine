@@ -2,7 +2,8 @@
 require './func.php';
 
 include_once('./classes/DataCache.php');
-$start = microtime(true);
+
+
 
 
 // Название кеша - каталог с количеством
@@ -21,6 +22,15 @@ if ($getDataFromCache) {
 
     //Получаем список категорий
     //$cats = $db->query("SELECT * FROM category")->fetchAll(PDO::FETCH_ASSOC);
+
+    $cats = doCatsArray();
+//     Обновляем данные в кэше
+    $dataCache->updateCacheData($cats);
+}
+
+function doCatsArray(){
+    global $db;
+    global $rootCats;
     $cats_res = $db->query("SELECT * FROM category");
 
     $cats = array();
@@ -31,25 +41,30 @@ if ($getDataFromCache) {
 
     }
 
+        //Выводим главные категории
+        /////////////////
+        function rootCatsFoo($i){
+            return $i['parent_id'] == 0;
+        }
+        $rootCats = array_filter($cats, 'rootCatsFoo');
 
-//    if   (mysql_num_rows($result) > 0){
-//        $cats = array();
-////В цикле формируем массив разделов, ключом будет id родительской категории, а также массив разделов, ключом будет id категории
-//        while($cat =  mysql_fetch_assoc($result)){
-//            $cats_ID[$cat['id']][] = $cat;
-//            $cats[$cat['parent_id']][$cat['id']] =  $cat;
-//        }
-//    }
+        $rootCats = addSecondCats($rootCats, $cats);
+        $rootCats = thirtCatArray($rootCats, $cats);
+        deb($rootCats);
 
-
-//    обходим категории и добавляем количество
-//    foreach ($cats as $key => $val){
-//        $cats[$key]['prods_count'] = addCountToCats($cats[$key]['cat_id']);
-//    }
-
-
-//     Обновляем данные в кэше
-    $dataCache->updateCacheData($cats);
+}
+function addSecondCats($rootCats, $cats){
+    foreach ($rootCats as $k => $i) {
+        $secondCats = array_filter($cats, function($i) use ($k, $rootCats){
+            //global $rootCats;
+            //global $k;
+            //deb($k);
+            return $i['parent_id'] == $rootCats[$k]['cat_id'];
+        });
+        //deb($secondCats);
+        $rootCats[$k]['childs'] = $secondCats;
+    }
+    return $rootCats;
 }
 
 
@@ -61,69 +76,19 @@ function addCountToCats($category_id){
 }
 
 
-
-
-
-
-
-//echo 'Время выполнения скрипта: '.round(microtime(true) - $start, 4).' сек.';
-
-//////////////////
-//Выводим главные категории
-/////////////////
-function rootCatsFoo($i){
-    return $i['parent_id'] == 0;
-}
-
-$rootCats = array_filter($cats, 'rootCatsFoo');
-/////
-
-
-/// вторые категории
-/// ////////////
-///
-
-
-foreach ($rootCats as $k => $i) {
-    $secondCats = array_filter($cats, function($i){
-        global $rootCats;
-        global $k;
-        return $i['parent_id'] == $rootCats[$k]['cat_id'];
-    });
-    $rootCats[$k]['childs'] = $secondCats;
-}
-
-
-
-
-function thirtCatArray(){
-    global $cats;
-    global $rootCats;
+function thirtCatArray($rootCats, $cats){
     foreach ($cats as $k => $i){
-      //deb($i['parent_id']);
       foreach ($rootCats as $rk => $ri){
-//          $thirdForSecond = array();
           foreach($ri['childs'] as $sk=>$si){
-
               if($si['cat_id']==$i['parent_id']){
-                  //deb($i);
                   $rootCats[$rk]['childs'][$sk]['childs'][$i['cat_id']] = $i;
               }
           }
       }
     }
-}
-thirtCatArray();
-$sc = 0;
-foreach ($rootCats as $k => $i){
-    $sc +=count($i['childs']);
+    return $rootCats;
 }
 
-
-
-
-//deb($sc+count($rootCats));
-//deb($rootCats);
 
 
 

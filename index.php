@@ -1,4 +1,5 @@
 <?php
+$start = microtime(true);
 //require './cats.php';
 
 if(!$_GET){
@@ -6,7 +7,8 @@ if(!$_GET){
     deb('главная');
 }
 else{
-    print_r($_GET);
-    echo "Старица категории ".$_GET['cat'];
+    if($_GET['cat']){
+        require './category.php';
+    }
     //deb($_GET);
 }
