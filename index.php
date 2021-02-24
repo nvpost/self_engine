@@ -5,6 +5,8 @@ require './cats.php';
 
 print_r($_GET);
 
+
+
 foreach($rootCats as $key => $rootCat){
     drowShowCaseItem($rootCat);
 }
@@ -26,7 +28,7 @@ function drowShowCaseItem($item){
         $itemHtml ."</div>";
 
         $itemHtml .= "<div class='show_case_item_actions'>";
-            $itemHtml .= "<a href='./category/".$item['cat_id']."'>Перейти к категории ".$item['cat_id']."</a>";
+            $itemHtml .= "<a href='/".HOME_URL."/category/".$item['cat_id']."'>Перейти к категории ".$item['cat_id']."</a>";
         $itemHtml ."</div>";
 
    $itemHtml ."</div>";
