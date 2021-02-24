@@ -5,7 +5,9 @@ require './cats.php';
 
 print_r($_GET);
 
-
+if($_GET['id']){
+    echo "категория ".$_GET['id'];
+}
 
 foreach($rootCats as $key => $rootCat){
     drowShowCaseItem($rootCat);
@@ -36,6 +38,13 @@ function drowShowCaseItem($item){
     echo $itemHtml;
     //deb($item);
 }
+
+function doQueryFromLabel($label){
+    return $label;
+}
+
+
+// переделать ID (key) в label
 
 
 

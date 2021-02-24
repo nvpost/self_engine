@@ -1,4 +1,7 @@
 <?php
+
+const HOME_URL = "noz_self";
+
 require './sql/sql_data_pass.php';
 
 
