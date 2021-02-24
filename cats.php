@@ -1,39 +1,38 @@
 <?php
 require './func.php';
-
 include_once('./classes/DataCache.php');
+//require './classes/DataCache.php';
 
 
 
+function checkCache(){
 
-// Название кеша - каталог с количеством
-$dataCache = new DataCache('catsAndCounts');
+    // Название кеша - каталог с количеством
+    $dataCache = new DataCache('catsAndCounts');
+    $getDataFromCache = $dataCache->initCacheData();
 
-$getDataFromCache = $dataCache->initCacheData();
+    if ($getDataFromCache) {
+        // Получаем кэшированные данные из кэша
+        //echo "из cache";
+        $cats = $dataCache->getCacheData();
+    } else {
+        // Исполняем этот код, если кеширование отключено или данные в кеше старые
 
-if ($getDataFromCache) {
-    // Получаем кэшированные данные из кэша
-    //echo "из cache";
-    $cats = $dataCache->getCacheData();
-} else {
-    // Исполняем этот код, если кеширование отключено или данные в кеше старые
-
-    // Создание каких-то данных или какая-то ресурсоёмкая задача
-
-    //Получаем список категорий
-    //$cats = $db->query("SELECT * FROM category")->fetchAll(PDO::FETCH_ASSOC);
-
-    $cats = doCatsArray();
-//     Обновляем данные в кэше
-    $dataCache->updateCacheData($cats);
+        $cats = doCatsArray();
+    //     Обновляем данные в кэше
+        $dataCache->updateCacheData($cats);
+    }
+    //deb($cats);
+    return $cats;
 }
 
 function doCatsArray(){
     global $db;
     global $rootCats;
+    $cats = array();
     $cats_res = $db->query("SELECT * FROM category");
 
-    $cats = array();
+
     while ($cat = $cats_res->fetch(PDO::FETCH_ASSOC))
     {
         $cats[$cat['cat_id']]=$cat;
@@ -50,7 +49,8 @@ function doCatsArray(){
 
         $rootCats = addSecondCats($rootCats, $cats);
         $rootCats = thirtCatArray($rootCats, $cats);
-        deb($rootCats);
+        //deb($rootCats);
+    return $rootCats;
 
 }
 function addSecondCats($rootCats, $cats){

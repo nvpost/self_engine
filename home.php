@@ -4,7 +4,7 @@ require './cats.php';
 //deb($rootCats);
 
 
-
+$rootCats = checkCache();
 foreach($rootCats as $key => $rootCat){
     drowShowCaseItem($rootCat);
 }

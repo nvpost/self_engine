@@ -35,13 +35,14 @@ class DataCache
 //            $this->setCacheTime(self::DEFAULT_CACHE_TIME);
 //        }
 //        $this->setCacheTime = 600;
-        $this->cacheTime = 6;
+        $this->cacheTime = 600;
 //        if (defined('SiteSettings::dataCacheFolder') && !empty(SiteSettings::dataCacheFolder)) {
 //            $this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] . SiteSettings::dataCacheFolder;
 //        } else {
 //            $this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] . self::DEFAULT_CACHE_PATH;
 //        }
         $this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] .'/noz_self/cache_data/';
+        //$this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] .'/noz_self/self_engine/cache_data/';
         //deb($this->cacheFolder);
         $this->dataName = $dataName;
         $md5hash = md5($this->dataName);
@@ -80,31 +81,31 @@ class DataCache
     #------------------------------
     public function initCacheData()
     {
-
         if (!$this->cacheEnabled) { return false; }
 
         $cacheOld = time() - @filemtime($this->cacheFullFileName);
-//        dev($cacheOld);
+//        deb($cacheOld);
 //        dev($this->cacheTime);
         if($cacheOld < $this->cacheTime) {
             $fp = @fopen($this->cacheFullFileName, "r");
             $this->cache = @fread($fp, filesize($this->cacheFullFileName));
-
             @fclose($fp);
             return true;
         }
-
         return false;
     }
 
     #-----------------------------
     public function getCacheData()
     {
+        //echo 'getCacheData';
         if (!$this->cacheEnabled) { return false; }
 
         if (empty($this->cache)) {
+            echo 'empty';
             return false;
         } else {
+           // deb('return');
             return unserialize($this->cache);
         }
     }
@@ -112,7 +113,7 @@ class DataCache
     #----------------------------------------
     public function updateCacheData($newData)
     {
-//        echo "updateCacheData";
+        //echo "updateCacheData";
         if (!$this->cacheEnabled) { return false; }
         $this->cache = $newData;
         $output = serialize($this->cache);
