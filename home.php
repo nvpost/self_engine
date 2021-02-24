@@ -49,5 +49,7 @@ function drowShowCaseItem($item){
 
 
 
-
+<?php
+require './debug_line.php';
+?>
 
