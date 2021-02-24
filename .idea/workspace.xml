@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e18d488-e039-4fc8-b69a-45c836b759fd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ .gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/category.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classes/Category.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats.php" beforeDir="false" afterPath="$PROJECT_DIR$/cats.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +68,8 @@
       <updated>1610957586590</updated>
       <workItem from="1610957588736" duration="30496000" />
       <workItem from="1612880980513" duration="14197000" />
-      <workItem from="1613984477351" duration="12799000" />
+      <workItem from="1613984477351" duration="14872000" />
+      <workItem from="1614186700507" duration="408000" />
     </task>
     <servers />
   </component>
@@ -81,7 +87,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/cats.php</url>
-          <line>109</line>
+          <line>102</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
