@@ -8,7 +8,13 @@ if(!$_GET){
 }
 else{
     if($_GET['cat']){
-        require './category.php';
+        require './subCategory.php';
     }
     //deb($_GET);
 }
+
+
+
+
+require './debug_line.php';
+

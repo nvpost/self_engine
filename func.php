@@ -2,6 +2,8 @@
 require './sql/sql_data_pass.php';
 
 
+$home_url = "/noz_self/self_engine/";
+
 
 
 
@@ -45,4 +47,4 @@ function addImgToCats($id){
 
 ?>
 
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="<?=$home_url?>/style.css">
