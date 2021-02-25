@@ -4,11 +4,13 @@ $start = microtime(true);
 
 if(!$_GET){
     require './home.php';
-    deb('главная');
+    //deb('главная');
 }
 else{
+    //print_r($_GET);
     if($_GET['cat']){
         require './subCategory.php';
+        require './products.php';
     }
     //deb($_GET);
 }
