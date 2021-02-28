@@ -4,7 +4,16 @@ require './sql/sql_data_pass.php';
 
 $home_url = "/noz_self/self_engine/";
 
-$columns = "products.prod_id pid, products.name product_name, products.descr descr, products.price price, img.prod_id img_pid, img.url src, img.title title";
+$columns = "products.id AS id, 
+            products.prod_id AS pid, 
+            products.name AS product_name, 
+            products.descr AS descr, 
+            products.price AS price, 
+            products.url AS url, 
+            img.id AS img_id, 
+            img.prod_id AS img_pid, 
+            img.url AS src, 
+            img.title AS title";
 
 
 function deb($v, $h=0){
@@ -42,13 +51,13 @@ function addImgToCats($id){
         //Если нет дочерних товаров смотрим в дочерней рубрике
         $res_childs_cats = $db->query("SELECT * FROM category WHERE parent_id =".$id );
         $childs_cats_id = $res_childs_cats->fetchAll(PDO::FETCH_ASSOC);
-        deb($id);
+        //deb($id);
 
         // Перебираем дочерние категории если есть что перебирать
         if($childs_cats_id){
-            deb("Вошли в еслии");
+            //deb("Вошли в еслии");
             foreach ($childs_cats_id as $c){
-                deb("Выполним поиск еще раз в категории ".$c['cat_id']." - ".$c['label']);
+                //deb("Выполним поиск еще раз в категории ".$c['cat_id']." - ".$c['label']);
                 return addImgToCats($c['cat_id']);
             }
         }else{
