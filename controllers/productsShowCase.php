@@ -1,6 +1,6 @@
 <?php
 
-require './drow/drowProductItem.php';
+require './drow/drowProductsShowcase.php';
 
 
 
@@ -27,6 +27,7 @@ $products = $products_res->fetchAll(PDO::FETCH_ASSOC);
 //deb(count($products));
 echo "<div class='showcase_container showcase_container_products'>";
 foreach($products as $key => $product){
-    drowProductItem($product);
+    //deb($product);
+    drowProductsShowcaseFoo($product);
 }
 echo "</div>";
