@@ -28,8 +28,9 @@ function checkCache($cacheName, $childCats = 0){
 function doCatsArray($childCats){
     global $db;
     global $rootCats;
+    global $limit;
     $cats = array();
-    $cats_res = $db->query("SELECT * FROM category WHERE parent_id=".$childCats);
+    $cats_res = $db->query("SELECT * FROM category WHERE parent_id='".$childCats."'  LIMIT ".$limit);
 
     //Проверка на вывод всех блоков
 //    if($childCats){
@@ -54,11 +55,11 @@ function doCatsArray($childCats){
         //Выводим главные категории
         /////////////////
         //deb($cats);
-        function rootCatsFoo($i){
-            global $childCats;
-            deb($childCats);
-            return $i['parent_id'] == (int)$childCats;
-        }
+//        function rootCatsFoo($i){
+//            global $childCats;
+//            deb($childCats);
+//            return $i['parent_id'] == (int)$childCats;
+//        }
 
         $rootCats = array_filter($cats, function($i) use($childCats){
             return $i['parent_id'] == (int)$childCats;
@@ -66,7 +67,7 @@ function doCatsArray($childCats){
 
         //$rootCats = addSecondCats($rootCats, $cats);
         //$rootCats = thirtCatArray($rootCats, $cats);
-       // deb($rootCats);
+        //deb($rootCats);
     return $rootCats;
 
 }
@@ -105,6 +106,45 @@ function thirtCatArray($rootCats, $cats){
       }
     }
     return $rootCats;
+}
+
+
+function checkProdCache($cacheName, $childCats = 0){
+    // Название кеша - каталог с количеством
+    $dataCache = new DataCache($cacheName);
+    $getDataFromCache = $dataCache->initCacheData();
+
+    if ($getDataFromCache) {
+        // Получаем кэшированные данные из кэша
+        //echo "из cache";
+        $products = $dataCache->getCacheData();
+        //deb($products);
+    } else {
+        // Исполняем этот код, если кеширование отключено или данные в кеше старые
+
+        $products = doProdsArray($childCats);
+        //     Обновляем данные в кэше
+        $dataCache->updateCacheData($products);
+    }
+    //deb($cats);
+
+
+    return $products;
+}
+
+function doProdsArray($parent_id){
+    global $db;
+    global $columns;
+    global $limit;
+    $sql = "SELECT $columns FROM products 
+    LEFT JOIN img ON (products.prod_id = img.prod_id) 
+    WHERE category_id='".$parent_id."'
+    GROUP BY products.prod_id, img.prod_id Limit ".$limit;
+
+    $products_res = $db->query($sql);
+    $products = $products_res->fetchAll(PDO::FETCH_ASSOC);
+
+    return $products;
 }
 
 

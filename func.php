@@ -3,6 +3,7 @@ require './sql/sql_data_pass.php';
 
 
 $home_url = "/noz_self/self_engine/";
+$limit = 6;
 
 $columns = "products.id AS id, 
             products.prod_id AS pid, 
@@ -10,6 +11,7 @@ $columns = "products.id AS id,
             products.descr AS descr, 
             products.price AS price, 
             products.url AS url, 
+            products.vendor AS vendor, 
             img.id AS img_id, 
             img.prod_id AS img_pid, 
             img.url AS src, 
@@ -72,4 +74,4 @@ function addImgToCats($id){
 ?>
 
 
-<link rel="stylesheet" href="<?=$home_url?>/style.css">
+<link rel="stylesheet" href="<?=$home_url?>/assets/style.css">

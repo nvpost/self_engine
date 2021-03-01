@@ -6,6 +6,7 @@ AddDefaultCharset UTF-8
 
 
 RewriteRule (*UTF8)^category/(.*+)/?$ index.php?cat=$1 [L]
+RewriteRule (*UTF8)^noz/(.*+)/?$ index.php?noz=$1 [L]
 
 
 </IfModule>

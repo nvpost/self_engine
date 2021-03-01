@@ -13,7 +13,7 @@
 /*}*/
 
 .showcase_container{
-    width: 1400px;
+    width: 80%;
     margin: 0px auto;
     border-left: 1px solid;
     border-right: 1px solid;
@@ -28,4 +28,10 @@
 }
 .show_case_item_img img{
     width: 200px;
+}
+
+
+/*product*/
+.product_item_imgs{
+    display: flex;
 }
