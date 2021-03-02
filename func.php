@@ -3,7 +3,8 @@ require './sql/sql_data_pass.php';
 
 
 $home_url = "/noz_self/self_engine/";
-$limit = 6;
+$cat_limit = 6;
+$prod_limit = 6;
 
 $columns = "products.id AS id, 
             products.prod_id AS pid, 
@@ -24,6 +25,11 @@ function deb($v, $h=0){
     print_r($v);
     echo "</pre>";
     if($h) echo "<hr>";
+}
+function c_deb($v){
+    echo "<script>";
+    echo "console.log('".$v."')";
+    echo "</script>";
 }
 
 

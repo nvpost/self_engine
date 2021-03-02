@@ -5,7 +5,7 @@ include_once('./classes/DataCache.php');
 
 
 
-function checkCache($cacheName, $childCats = 0){
+function checkCache($cacheName, $childCats = 0, $offset=0){
     // Название кеша - каталог с количеством
     $dataCache = new DataCache($cacheName);
     $getDataFromCache = $dataCache->initCacheData();
@@ -17,7 +17,7 @@ function checkCache($cacheName, $childCats = 0){
     } else {
         // Исполняем этот код, если кеширование отключено или данные в кеше старые
 
-        $cats = doCatsArray($childCats);
+        $cats = doCatsArray($childCats, $offset);
     //     Обновляем данные в кэше
         $dataCache->updateCacheData($cats);
     }
@@ -25,22 +25,19 @@ function checkCache($cacheName, $childCats = 0){
     return $cats;
 }
 
-function doCatsArray($childCats){
+function doCatsArray($childCats, $offset){
     global $db;
     global $rootCats;
-    global $limit;
+    global $cat_limit;
     $cats = array();
-    $cats_res = $db->query("SELECT * FROM category WHERE parent_id='".$childCats."'  LIMIT ".$limit);
-
-    //Проверка на вывод всех блоков
-//    if($childCats){
-//        echo ($childCats);
-//        echo "FROM category WHERE parent_id";
-//        $cats_res = $db->query("SELECT * FROM category WHERE parent_id=".$childCats);
-//    }else{
-//        echo "Внутри главной ветки ".$childCats;
-//        $cats_res = $db->query("SELECT * FROM category");
-//    }
+    deb('offset');
+    deb((int)$offset);
+    deb('offset');
+    //BETWEEN 50 AND 100
+    $cat_sql = "SELECT * FROM category 
+                WHERE parent_id='".$childCats."'
+                LIMIT ".(int)$offset.", ".$cat_limit;
+    $cats_res = $db->query($cat_sql);
 
 
 
@@ -52,14 +49,6 @@ function doCatsArray($childCats){
 
     }
 
-        //Выводим главные категории
-        /////////////////
-        //deb($cats);
-//        function rootCatsFoo($i){
-//            global $childCats;
-//            deb($childCats);
-//            return $i['parent_id'] == (int)$childCats;
-//        }
 
         $rootCats = array_filter($cats, function($i) use($childCats){
             return $i['parent_id'] == (int)$childCats;
@@ -133,13 +122,14 @@ function checkProdCache($cacheName, $childCats = 0){
 }
 
 function doProdsArray($parent_id){
+    global $prod_limit;
     global $db;
     global $columns;
     global $limit;
     $sql = "SELECT $columns FROM products 
     LEFT JOIN img ON (products.prod_id = img.prod_id) 
     WHERE category_id='".$parent_id."'
-    GROUP BY products.prod_id, img.prod_id Limit ".$limit;
+    GROUP BY products.prod_id, img.prod_id Limit ".$prod_limit;
 
     $products_res = $db->query($sql);
     $products = $products_res->fetchAll(PDO::FETCH_ASSOC);

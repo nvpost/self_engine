@@ -5,16 +5,19 @@ header('Content-Type: text/html; charset=utf-8');
 
 $start = microtime(true);
 //require './cats.php';
-print_r($_SERVER['REQUEST_URI']);
+
+
 if(!$_GET){
     require './controllers/home.php';
-    //deb('главная');
+    deb('главная');
 }
 else{
     //print_r($_GET);
     if($_GET['cat']){
+        echo 'категории';
         require './controllers/subCategory.php';
-        require './controllers/productsShowCase.php';
+        //require './controllers/productsShowCase.php';
+
     }
     if($_GET['noz']){
 

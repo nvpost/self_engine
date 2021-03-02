@@ -19,7 +19,7 @@ function drowShowCaseItem($item){
 
         $itemHtml .= "<div class='show_case_item_actions'>";
             $cat_link = str_replace([' ', '.'], ['_', ''], $item['label']);
-            $itemHtml .= "<a href='".$home_url."category/".$cat_link."'>Перейти к категории ".$item['cat_id']."</a>";
+            $itemHtml .= "<a href='".$home_url."category/".$cat_link."'>Перейти к категории ".$item['label']."</a>";
         $itemHtml .="</div>";
 
     $itemHtml .="</div>";

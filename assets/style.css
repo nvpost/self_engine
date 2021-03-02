@@ -23,7 +23,7 @@
     justify-content: space-between;
 }
 .show_case_item{
-    width: 300px;
+    width: 30%;
     height: 400px;
 }
 .show_case_item_img img{
@@ -34,4 +34,22 @@
 /*product*/
 .product_item_imgs{
     display: flex;
+}
+/*pagination*/
+.pagination_row{
+    display: flex;
+    justify-content: space-around;
+}
+.pagination_row .pagination_box a{
+    color: #484848;
+    text-decoration: none;
+    display: block;
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 5px;
+    transition: 0.3s;
+}
+.pagination_row .pagination_box a:hover{
+    background-color: aliceblue;
+    color: black;
 }
