@@ -9,6 +9,9 @@ function checkCache($cacheName, $childCats = 0, $offset=0){
     // Название кеша - каталог с количеством
     $dataCache = new DataCache($cacheName);
     $getDataFromCache = $dataCache->initCacheData();
+//    deb($cacheName, 1);
+//    deb($childCats, 1);
+//    deb($offset, 1);
 
     if ($getDataFromCache) {
         // Получаем кэшированные данные из кэша
@@ -30,9 +33,9 @@ function doCatsArray($childCats, $offset){
     global $rootCats;
     global $cat_limit;
     $cats = array();
-    deb('offset');
-    deb((int)$offset);
-    deb('offset');
+//    deb('offset');
+//    deb((int)$offset);
+//    deb('offset');
     //BETWEEN 50 AND 100
     $cat_sql = "SELECT * FROM category 
                 WHERE parent_id='".$childCats."'
@@ -100,16 +103,19 @@ function thirtCatArray($rootCats, $cats){
 
 function checkProdCache($cacheName, $childCats = 0){
     // Название кеша - каталог с количеством
+    deb($cacheName);
     $dataCache = new DataCache($cacheName);
     $getDataFromCache = $dataCache->initCacheData();
 
     if ($getDataFromCache) {
         // Получаем кэшированные данные из кэша
-        //echo "из cache";
+        echo "из cache";
         $products = $dataCache->getCacheData();
         //deb($products);
     } else {
         // Исполняем этот код, если кеширование отключено или данные в кеше старые
+
+        echo "Новый список товаров";
 
         $products = doProdsArray($childCats);
         //     Обновляем данные в кэше
@@ -125,16 +131,37 @@ function doProdsArray($parent_id){
     global $prod_limit;
     global $db;
     global $columns;
-    global $limit;
-    $sql = "SELECT $columns FROM products 
-    LEFT JOIN img ON (products.prod_id = img.prod_id) 
-    WHERE category_id='".$parent_id."'
-    GROUP BY products.prod_id, img.prod_id Limit ".$prod_limit;
+
+    $prod_fetch_start = microtime(true);
+
+//    $sql = "SELECT $columns FROM products
+//    LEFT JOIN img ON (products.prod_id = img.prod_id)
+//    WHERE category_id='".$parent_id."'
+//    GROUP BY products.prod_id, img.prod_id Limit ".$prod_limit;
+
+    //left join работает медлено, замена на получение из функции
+    $sql = "SELECT * FROM products 
+    WHERE category_id='".$parent_id."' Limit ".$prod_limit;
 
     $products_res = $db->query($sql);
     $products = $products_res->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($products as $k => $p){
+        $products[$k]['src'] = getImgForShowcaseProdunct($p['prod_id']);
+
+    }
+
+    //$prod_fetch_fin = microtime(true);
+    //$prod_fetch_time = 't: '.round(microtime(true) - $prod_fetch_start, 4).'s.';
+    //c_deb($prod_fetch_time);
 
     return $products;
+}
+
+function getImgForShowcaseProdunct($pid){
+    global $db;
+    $img_res = $db->query("SELECT * FROM img WHERE prod_id=".$pid);
+    $img = $img_res->fetch(PDO::FETCH_ASSOC);
+    return $img['url'];
 }
 
 

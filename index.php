@@ -9,14 +9,18 @@ $start = microtime(true);
 
 if(!$_GET){
     require './controllers/home.php';
-    deb('главная');
+    //deb('главная');
 }
 else{
     //print_r($_GET);
     if($_GET['cat']){
-        echo 'категории';
+        //echo 'категории';
         require './controllers/subCategory.php';
-        //require './controllers/productsShowCase.php';
+        //deb($cat_counter);
+        require './controllers/productsShowCase.php';
+//        if($cat_counter<$subCatsLimit){
+//            require './controllers/productsShowCase.php';
+//        }
 
     }
     if($_GET['noz']){

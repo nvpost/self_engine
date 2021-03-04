@@ -5,6 +5,7 @@ require './sql/sql_data_pass.php';
 $home_url = "/noz_self/self_engine/";
 $cat_limit = 6;
 $prod_limit = 6;
+$subCatsLimit = 6;
 
 $columns = "products.id AS id, 
             products.prod_id AS pid, 
@@ -77,6 +78,44 @@ function addImgToCats($id){
 
 
 }
+
+
+function doUrl($g){
+    //$g = $_GET['cat|noz']
+    global $cat_limit;
+
+    if(strpos($g, '/')&&explode('/', $g)[1]!=""){
+        $exploded_url = explode('/', $g);
+        $routeArray['cacheName'] = $exploded_url[0].$exploded_url[1];
+        $routeArray['pure_cat_label'] = $exploded_url[0];
+        $routeArray['offset'] = ($exploded_url[1]-1)*$cat_limit;;
+        //echo "покажем категорию ".$exploded_url[0]." и отступ ".$exploded_url[1];
+        //echo "<br> Товары с ".($exploded_url[1]-1)*$cat_limit." по ".$exploded_url[1]*$cat_limit;
+    }else{
+        $cacheName = str_replace("/", "", $g);
+        $routeArray['cacheName'] = $cacheName;
+        $routeArray['pure_cat_label'] = $cacheName;
+    }
+    return $routeArray;
+}
+
+
+function pagination($pages){
+    global $home_url;
+    global $routeArray;
+    $paginationHtml="<div class='pagination_row'>";
+    for($i=1;$i<=$pages; $i++){
+
+        $paginationUrl = $home_url."category/".$routeArray['pure_cat_label']."/".$i;
+        //c_deb($paginationUrl);
+        $paginationHtml .= "<div class = 'pagination_box'>";
+        $paginationHtml .= "<a href='".$paginationUrl."'>".$i."</a>";
+        $paginationHtml .= "</div>";
+    }
+    $paginationHtml .="</div>";
+    return $paginationHtml;
+}
+
 ?>
 
 
