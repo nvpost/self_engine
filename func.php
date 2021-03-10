@@ -33,6 +33,22 @@ function c_deb($v){
     echo "</script>";
 }
 
+function doHeader($title, $description="Интернет магазин ножей"){
+    $headerHtml = "<head>";
+    $headerHtml .= "<meta http-equiv='content-type' content='text/html; charset=utf-8'>";
+    $headerHtml .= "<title>".$title."</title>";
+    $headerHtml .= "<meta name='description' content='".$description."' />";
+    $headerHtml .= "<head>";
+
+    echo $headerHtml;
+}
+
+
+
+
+
+
+
 
 function addImgToCats($id){
     global $columns;
@@ -43,7 +59,7 @@ function addImgToCats($id){
 //    $res_cats_prods = $db->query($sql);
     $res_cats_prods = $db->query("SELECT * FROM products WHERE products.category_id =".$id);
     if(!$res_cats_prods){
-        deb($db->errorInfo());
+        //deb($db->errorInfo());
     }
 
     $cats_prods = $res_cats_prods->fetch(PDO::FETCH_ASSOC);
@@ -99,6 +115,17 @@ function doUrl($g){
     return $routeArray;
 }
 
+
+function checkPagination($visiableItems, $itemCounter){
+    if($visiableItems<$itemCounter){
+        $pages = ceil($itemCounter)/$visiableItems;
+        echo "<div class='show_more_items'>";
+        //echo "<a href='".$home_url."category/".$cacheName."/".$limit."'>Следующие категории</a>";
+        echo pagination($pages);
+        echo "</div>";
+
+    }
+}
 
 function pagination($pages){
     global $home_url;

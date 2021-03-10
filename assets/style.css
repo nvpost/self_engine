@@ -12,7 +12,8 @@
 /*    font-family: monospace;*/
 /*}*/
 
-.showcase_container{
+.showcase_container,
+.line_menu{
     width: 80%;
     margin: 0px auto;
     border-left: 1px solid;
@@ -39,6 +40,7 @@
 .pagination_row{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 .pagination_row .pagination_box a{
     color: #484848;
@@ -52,4 +54,22 @@
 .pagination_row .pagination_box a:hover{
     background-color: aliceblue;
     color: black;
+}
+
+/*line_menu*/
+/*.line_menu{*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+.line_menu_item {
+    border-right: 1px solid;
+    padding: 0px 10px;
+    transition: 0.3s;
+}
+.line_menu_item a{
+    color: #484848;
+    text-decoration: none;
+}
+.line_menu_item a:hover{
+    color: black
 }

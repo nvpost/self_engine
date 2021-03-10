@@ -1,10 +1,13 @@
 <?php
-require './cats.php';
+require './catsAndProdsShowcase.php';
 require './drow/drowCatalogItem.php';
+require './drow/drowMenuLine.php';
 
 
 
 $cacheName = $_GET['cat'];
+
+
 
 //если есть слешь то запросим категории с отступом
 
@@ -44,6 +47,15 @@ $rootCats = checkCache($routeArray['cacheName'], $parent_id, $routeArray['offset
 
 
 
+//do header
+$heatTitle = "Товары категории ".$db_label;
+$headDesrc = "Товары категории ".$db_label;
+doHeader($heatTitle, $headDesrc);
+
+$menu = checkMenuCache($parent_id);
+echo drowMenu($menu);
+//deb($menu);
+
 if($rootCats){
     echo "<div class='showcase_container'>";
     foreach($rootCats as $key => $rootCat){
@@ -65,14 +77,7 @@ function paginationOrShowMore(){
     return $showMoreHtml;
 }
 
-if(count($rootCats)<$cat_counter){
-    $pages = ceil($cat_counter/count($rootCats));
-    echo "<div class='show_more_items'>";
-    //echo "<a href='".$home_url."category/".$cacheName."/".$limit."'>Следующие категории</a>";
-    echo pagination($pages);
-    echo "</div>";
-
-}
+checkPagination(count($rootCats), $cat_counter);
 
 
 

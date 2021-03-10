@@ -100,22 +100,22 @@ function thirtCatArray($rootCats, $cats){
     return $rootCats;
 }
 
-
+ // TODO пернести в функцию обработки категорий
 function checkProdCache($cacheName, $childCats = 0){
     // Название кеша - каталог с количеством
-    deb($cacheName);
+    //deb($cacheName);
     $dataCache = new DataCache($cacheName);
     $getDataFromCache = $dataCache->initCacheData();
 
     if ($getDataFromCache) {
         // Получаем кэшированные данные из кэша
-        echo "из cache";
+        //echo "из cache";
         $products = $dataCache->getCacheData();
         //deb($products);
     } else {
         // Исполняем этот код, если кеширование отключено или данные в кеше старые
 
-        echo "Новый список товаров";
+        //echo "Новый список товаров";
 
         $products = doProdsArray($childCats);
         //     Обновляем данные в кэше
@@ -162,6 +162,38 @@ function getImgForShowcaseProdunct($pid){
     $img_res = $db->query("SELECT * FROM img WHERE prod_id=".$pid);
     $img = $img_res->fetch(PDO::FETCH_ASSOC);
     return $img['url'];
+}
+
+
+/*Меню для категорий, все блоки*/
+
+function checkMenuCache($parent_id){
+    global $db;
+    $cacheName = 'menu'.$parent_id;
+    $dataCache = new DataCache($cacheName);
+    $getDataFromCache = $dataCache->initCacheData();
+
+    if ($getDataFromCache) {
+        // Получаем кэшированные данные из кэша
+        //echo "из cache";
+        $cat_res = $dataCache->getCacheData();
+        //deb($products);
+    } else {
+
+        $sql = "SELECT * FROM category WHERE parent_id=".$parent_id;
+
+        $cat_res = $db->query($sql);
+
+        $cat_res = $cat_res->fetchAll(PDO::FETCH_ASSOC);
+        if(!$cat_res){
+            //ошибка исправить
+            //deb($db->errorInfo());
+        }
+        //     Обновляем данные в кэше
+        $dataCache->updateCacheData($cat_res);
+    }
+    //deb($cats);
+    return $cat_res;
 }
 
 

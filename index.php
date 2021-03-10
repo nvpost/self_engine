@@ -1,10 +1,10 @@
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
 
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
 $start = microtime(true);
-//require './cats.php';
+//require './catsAndProdsShowcase.php';
 
 
 if(!$_GET){
@@ -18,9 +18,6 @@ else{
         require './controllers/subCategory.php';
         //deb($cat_counter);
         require './controllers/productsShowCase.php';
-//        if($cat_counter<$subCatsLimit){
-//            require './controllers/productsShowCase.php';
-//        }
 
     }
     if($_GET['noz']){
