@@ -30,6 +30,9 @@
 	<!-- =============== HEADER END =============== -->
 
 	<!-- =============== main-slider =============== -->
+    <?php
+        require_once 'components/slider.php';
+    ?>
 <!--slider.php-->
 	<!-- ============= main-slider end ============= -->
 
