@@ -17,6 +17,7 @@ doHeader($heatTitle, $headDesrc);
 $rootCats = checkCache('catsAndCounts', 0);
 //контент
 $menu = checkMenuCache(0);
+
 echo drowMenu($menu);
 //deb($rootCats);
 echo "<div class='showcase_container'>";

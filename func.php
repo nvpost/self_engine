@@ -4,9 +4,9 @@ require __DIR__.'/sql/sql_data_pass.php';
 
 $home_url = "/noz_self/self_engine/";
 $home_url = "/noz_template/";
-$cat_limit = 6;
-$prod_limit = 6;
-$subCatsLimit = 6;
+$cat_limit = 12;
+$prod_limit = 12;
+$subCatsLimit = 12;
 
 $columns = "products.id AS id, 
             products.prod_id AS pid, 
@@ -36,6 +36,7 @@ function c_deb($v){
 
 
 function doHeader($title, $description="Интернет магазин ножей"){
+    global $home_url;
     $headerHtml = "<head>";
     $headerHtml .= "<meta http-equiv='content-type' content='text/html; charset=utf-8'>";
     $headerHtml .= "<title>".$title."</title>";
@@ -44,20 +45,27 @@ function doHeader($title, $description="Интернет магазин ноже
     $headerHtml .= "<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>";
 	$headerHtml .= "<link rel='shortcut icon' href='assets/img/favicon.png'>";
 
-	$headerHtml .= "<link rel='stylesheet' href='assets/css/slick.min.css'>";
-	$headerHtml .= "<link rel='stylesheet' href='assets/css/bootstrap-grid.css'>";
-	$headerHtml .= "<link rel='stylesheet' href='assets/css/font-awesome.min.css'>";
-	$headerHtml .= "<link rel='stylesheet' href='assets/css/nice-select.css'>";
-	$headerHtml .= "<link rel='stylesheet' href='assets/css/animate.css'>";
-	$headerHtml .= "<link rel='stylesheet' href='assets/css/style.css'>";
+	$headerHtml .= "<link rel='stylesheet' href='".$home_url."assets/css/slick.min.css'>";
+	$headerHtml .= "<link rel='stylesheet' href='".$home_url."assets/css/bootstrap-grid.css'>";
+	$headerHtml .= "<link rel='stylesheet' href='".$home_url."assets/css/font-awesome.min.css'>";
+	$headerHtml .= "<link rel='stylesheet' href='".$home_url."assets/css/nice-select.css'>";
+	$headerHtml .= "<link rel='stylesheet' href='".$home_url."assets/css/animate.css'>";
+	$headerHtml .= "<link rel='stylesheet' href='".$home_url."assets/css/style.css'>";
 
 
-	$headerHtml .= "<link rel='stylesheet' href='assets/style.css'>";
-
+	$headerHtml .= "<link rel='stylesheet' href='".$home_url."assets/style.css'>";
+//href='".__DIR__."
 
     $headerHtml .= "<head>";
 
     echo $headerHtml;
+}
+
+function doFooter(){
+    global $home_url;
+    $footerHtml = "<script src='".$home_url."assets/script.js'></script>";
+
+    echo $footerHtml;
 }
 
 

@@ -205,27 +205,44 @@ function doMenuLevel($parent_id){
 }
 
 function doSecondLevel($cat_item){
-    deb('ffff');
     foreach ($cat_item as $k =>$rootItem){
         $sub_level_items = doMenuLevel($rootItem['cat_id']);
         foreach($sub_level_items as $sk => $sub_item){
+            $count = addProductsCount($sub_item['cat_id']);
+            $childCount = checkChildCats($sub_item['cat_id']);
 
-            $sub_level_items[$sk]['prod_count'] = addCount($sub_item['cat_id']);
+            if($count==0&&$childCount==0){
+                //c_deb("удаляем ". $sk);
+                unset($sub_level_items[$sk]);
+            }else{
+                $sub_level_items[$sk]['prod_count'] = $count;
+                $sub_level_items[$sk]['child_count'] = $childCount;
+            }
+
+
         }
         $cat_item[$k]['sub_menu'] = $sub_level_items;
-        deb($sub_level_items);
     }
 
     return $cat_item;
 }
 
-function addCount($cat_id){
+function addProductsCount($cat_id){
     global $db;
     $sql = "SELECT * FROM products WHERE category_id=".$cat_id;
     $prod_count = $db->query($sql)->rowCount();
 
     return $prod_count;
 }
+function checkChildCats($cat_id){
+    global $db;
+    $sql = "SELECT * FROM category WHERE parent_id=".$cat_id;
+    $cats_count = $db->query($sql)->rowCount();
+
+    return $cats_count;
+}
+
+
 
 
 

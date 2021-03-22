@@ -52,9 +52,15 @@ $heatTitle = "Товары категории ".$db_label;
 $headDesrc = "Товары категории ".$db_label;
 doHeader($heatTitle, $headDesrc);
 
-$menu = checkMenuCache($parent_id);
-echo drowMenu($menu);
+
+$mainMenu = checkMenuCache(0);
+echo drowMenu($mainMenu);
+
+//$InnerMenu = checkMenuCache($parent_id);
+//echo drowMenu($InnerMenu);
+//deb($parent_id);
 //deb($menu);
+
 
 if($rootCats){
     echo "<div class='showcase_container'>";
