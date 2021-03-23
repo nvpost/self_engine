@@ -2083,8 +2083,8 @@ footer .social-list {
 }
 
 .main-slider .main-slide .main-slide-info p {
-    max-width: 470px;
-    margin: 0 auto 34px;
+    /*max-width: 470px;*/
+    /*margin: 0 auto 34px;*/
     -webkit-transform: translateY(70px);
     transform: translateY(70px);
     opacity: 0;
@@ -7382,7 +7382,7 @@ body.modal {
     }
 
     .main-slider .main-slide .main-slide-info p {
-        max-width: 390px
+        /*max-width: 390px*/
     }
 
     .main-slide-navigation .slick-dots li button {

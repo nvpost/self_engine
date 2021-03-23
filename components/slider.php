@@ -7,7 +7,21 @@ function getSliderGoods(){
     $prod_res = $db->query($sql);
     $prods = $prod_res->fetchAll(PDO::FETCH_ASSOC);
 
+    foreach ($prods as $k => $prod){
+        //правильные картинки
+        // $src = getImgForShowcaseProdunct($prod['prod_id']);
+        // $prods[$k]['src'] = $src;
+        //случайные картинки
+        $img = getRandomIng();
+        $prods[$k]['img'] = $img;
+    }
+
+
     return $prods;
+
+}
+
+function addImgToProd(){
 
 }
 
@@ -17,23 +31,26 @@ $slider_goods = getSliderGoods();
 
 function doSliderItem($item){
     //deb($item);
+    $desr = mb_substr($item['descr'],0,100);
+    $prod_link = "noz/".str_replace([' ', '.'], ['_', ''], $item['name']);
     $slideHtml = "<div class='main-slide'>
                 <div class='main-slide-bg' style='background-image: url(assets/img/bg-slider.svg);'></div>
                 <div class='container'>
                     <div class='main-slide-info'>
                         <h2 class='title'>".$item['name']."</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-                        <a href='single-shop.html' class='btn'><span>buy now</span></a>
+                        <p>".$desr."</p>
+                        <a href='{$prod_link}' class='btn' target='_blank'><span>Подробнее</span></a>
+                        <a href='{$item['url']}' class='btn' target='_blank'><span>Купить сейчас</span></a>
                     </div>
                     <div class='slide-img-cover'>
                         <a href='single-shop.html' class='lable-bike'>
-                            <div class='lable-bike-img'><img src='assets/img/bike-info-slide.jpg' alt='img'></div>
+                            <div class='lable-bike-img'><img src='img/{$item['img']['src']}' alt='img'></div>
                             <div class='lable-bike-item'>
-                                <div class='model'>model SX-200</div>
-                                <div class='price'>$1399</div>
+                                <div class='model'>{$item['vendor']}</div>
+                                <div class='price'>{$item['price']}</div>
                             </div>
                         </a>
-                        <img src='assets/img/img-slider.png' alt='img' class='slide-img'>
+                        <img src='img/".$item['img']['src']."' alt='img' class='slide-img'>
                     </div>
                 </div>
             </div>";
