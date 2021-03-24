@@ -1,8 +1,5 @@
 <?php
-$rootCats = checkCache('catsAndCounts', 0);
-//контент
-$menu = checkMenuCache(0);
-//deb($menu);
+// root Cats вынесено в функции catsAndProdshowcase, там же проверка на cache
 
 function doFirstLevel($menu_item){
     global $home_url;
@@ -43,7 +40,7 @@ function doFirstLevel($menu_item){
 				<nav class="nav-menu">
 					<ul class="nav-list">
 
-                        <?php foreach ($menu as $k => $first_level):?>
+                        <?php foreach ($menuTree as $k => $first_level):?>
                             <?=doFirstLevel($first_level)?>
                         <?php endforeach;?>
 

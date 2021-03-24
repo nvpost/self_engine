@@ -133,10 +133,6 @@ function doProdsArray($parent_id){
 
     $prod_fetch_start = microtime(true);
 
-//    $sql = "SELECT $columns FROM products
-//    LEFT JOIN img ON (products.prod_id = img.prod_id)
-//    WHERE category_id='".$parent_id."'
-//    GROUP BY products.prod_id, img.prod_id Limit ".$prod_limit;
 
     //left join работает медлено, замена на получение из функции
     $sql = "SELECT * FROM products 
@@ -145,7 +141,7 @@ function doProdsArray($parent_id){
     $products_res = $db->query($sql);
     $products = $products_res->fetchAll(PDO::FETCH_ASSOC);
     foreach ($products as $k => $p){
-        $products[$k]['src'] = getImgForShowcaseProdunct($p['prod_id']);
+        $products[$k]['src'] = getImgForShowcaseProduct($p['prod_id']);
 
     }
 
@@ -156,7 +152,7 @@ function doProdsArray($parent_id){
     return $products;
 }
 
-function getImgForShowcaseProdunct($pid){
+function getImgForShowcaseProduct($pid){
     global $db;
     $img_res = $db->query("SELECT * FROM img WHERE prod_id=".$pid);
     $img = $img_res->fetch(PDO::FETCH_ASSOC);
@@ -241,6 +237,16 @@ function checkChildCats($cat_id){
 
     return $cats_count;
 }
+
+
+
+
+$rootCats = checkCache('catsAndCounts', 0);
+//deb($rootCats);
+//контент
+$menuTree = checkMenuCache(0);
+//addImgToCats($id)
+//deb($rootCats);
 
 
 
