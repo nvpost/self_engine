@@ -2,6 +2,7 @@
 <html lang="ru">
 
 <?php
+ini_set('error_reporting', E_ALL);
 $time_start = microtime(true);
 //    require_once 'func.php';
     require './catsAndProdsShowcase.php';

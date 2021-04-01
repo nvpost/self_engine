@@ -82,3 +82,11 @@ body {
 .line_menu.sub_level .line_menu_item.sub_level{
     flex:auto;
 }
+
+
+.product-cover{
+    justify-content: space-between;
+}
+.product-item{
+    width: 250px;
+}

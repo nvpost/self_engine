@@ -237,7 +237,7 @@ body {
 
 body.page-loaded {
     overflow: auto;
-    overflow-x: hidden
+    overflow-x: auto;
 }
 
 body.page-loaded .preloader-cover {

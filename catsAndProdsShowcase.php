@@ -241,12 +241,19 @@ function checkChildCats($cat_id){
 
 
 
+
+
+
 $rootCats = checkCache('catsAndCounts', 0);
 //deb($rootCats);
 //контент
 $menuTree = checkMenuCache(0);
 //addImgToCats($id)
-//deb($rootCats);
+
+
+
+
+
 
 
 
