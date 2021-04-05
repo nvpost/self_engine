@@ -24,6 +24,15 @@ require './catsAndProdsShowcase.php';
     <?
      if(!$_GET){
          require_once 'pages/main.php';
+     }else{
+        //deb($_GET);
+        if(isset($_GET['noz'])){
+            require_once 'pages/tovar.php';
+
+         }
+         if(isset($_GET['category'])){
+             deb("Страница категории");
+         }
      }
 
     ?>
@@ -95,12 +104,14 @@ require './catsAndProdsShowcase.php';
 	</a>
 	<!--=================== TO TOP END ===================-->
 	<!--==================== SCRIPT	====================-->
-	<script src="assets/js/jquery-2.2.4.min.js"></script>
-	<script src="assets/js/slick.min.js"></script>
-	<script src="assets/js/jquery.nice-select.js"></script>
-	<script src="assets/js/wow.js"></script>
-	<script src="assets/js/lazyload.min.js"></script>
-	<script src="assets/js/scripts.js"></script>
+	<script src="http://localhost/noz_template/assets/js/jquery-2.2.4.min.js"></script>
+    <script src="http://localhost/noz_template/assets/js/jquery.fancybox.js"></script>
+	<script src="http://localhost/noz_template/assets/js/slick.min.js"></script>
+	<script src="http://localhost/noz_template/assets/js/jquery.nice-select.js"></script>
+	<script src="http://localhost/noz_template/assets/js/wow.js"></script>
+	<script src="http://localhost/noz_template/assets/js/lazyload.min.js"></script>
+	<script src="http://localhost/noz_template/assets/js/scripts.js"></script>
+
 
 <?php
 $time_log = 't: '.round(microtime(true) - $time_start, 4).'s.';
