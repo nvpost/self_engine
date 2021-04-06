@@ -9,7 +9,7 @@ $relatedVendorProducts = $relatedProducts->getRelatedVendor();
 
 $relatedPriceProducts = $relatedProducts->getRelatedForPrice(0.2);
 
-$relatedForCat = $relatedProducts->getRelatedForCat()
+$relatedForCat = $relatedProducts->getRelatedForCat();
 
 //deb($relatedPriceProducts);
 

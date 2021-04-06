@@ -7,10 +7,10 @@
     </h2>
     <div class="single-price">
         <div class="new-price">
-            <?=$tovar['price']?> &#8381;
+            <?=number_format($tovar['price'], 0, '', ' ')?> &#8381;
         </div>
         <div class="old-price">
-            <?=$tovar['price']*1.3?> &#8381;
+            <?=number_format($tovar['price']*1.3, 0, '', ' ')?> &#8381;
         </div>
     </div>
 

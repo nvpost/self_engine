@@ -1,9 +1,19 @@
 <link rel="stylesheet" href="http://localhost/noz_template/assets/css/jquery.fancybox.css">
 
+
+<?php
+
+
+?>
+
+
+
 <?php
 
 $cacheName = $_GET['noz'];
 $db_label = str_replace('_', ' ', $cacheName);
+
+
 
 
 function getTovar($db_label){
@@ -27,6 +37,28 @@ function getCat($catId){
 $tovar = getTovar($db_label);
 
 //deb($tovar);
+
+$heatTitle = $db_label."|".$tovar['cat_info']['label'].". Купить - ".number_format($tovar['price'], 0, '', ' '). " руб.";
+$desrcTile = "Огромный выбор ножей самых известных производителей";
+
+$headRequired = "Купить ".$db_label." - ".number_format($tovar['price'], 0, '', ' ');
+$headProdDesrc=$tovar['descr'];
+
+$headDescr = $headRequired.". ".$headProdDesrc;
+
+if(strlen($headDescr)>180){
+    $headDescr = mb_substr($headDescr, 0, 180).'...';
+}else{
+    $headDescr = $headDescr. ". ". $desrcTile;
+}
+
+doHeader($heatTitle, $headDescr);
+
+?>
+
+
+<?
+    require_once 'components/afterHead.php';
 ?>
 
 <!-- ================ HEADER-TITLE ================ -->

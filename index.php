@@ -10,16 +10,9 @@ require './catsAndProdsShowcase.php';
 ?>
 <?php
     //do header
-    $heatTitle = "Интернет магазин ножей";
-    $headDesrc = "Огромный выбор ножей самых известных производителей";
-    doHeader($heatTitle, $headDesrc);
-
-
 ?>
 
-    <?
-        require_once 'components/afterHead.php';
-    ?>
+
 <!--Контент страницы-->
     <?
      if(!$_GET){
@@ -32,6 +25,9 @@ require './catsAndProdsShowcase.php';
          }
          if(isset($_GET['category'])){
              deb("Страница категории");
+         }
+         if(isset($_GET['cat'])){
+             deb("Страница категории - ".$_GET['cat']);
          }
      }
 

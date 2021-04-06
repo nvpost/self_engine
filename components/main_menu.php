@@ -36,7 +36,7 @@ function doFirstLevel($menu_item){
 		</a>
 		<div class="header-menu">
 			<div class="container">
-				<a href="index.html" class="logo"><img src="assets/img/logo.svg" alt="logo"></a>
+				<a href="<?=$home_url?>index.php" class="logo"><img src="<?=$home_url?>assets/img/logo.svg" alt="logo"></a>
 				<nav class="nav-menu">
 					<ul class="nav-list">
 
