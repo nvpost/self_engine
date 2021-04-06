@@ -25,6 +25,9 @@ class CatalogClass
         $prods_res = $db->query($sql);
         $prods = $prods_res->fetchAll(PDO::FETCH_ASSOC);
         //deb($prods);
+        foreach ($prods as $k => $p){
+            $prods[$k]['img']=addImgToProd($p['prod_id']);
+        }
         return $prods;
     }
 

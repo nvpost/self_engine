@@ -1,14 +1,5 @@
 <?php
-$parent_id = 0;
 
-require_once "classes/CatalogClass.php";
-
-require_once 'components/catalogShowcaseProduct.php';
-
-$category = new CatalogClass(0);
-
-
-$mainPageProds = $category->checkCatalogData('catalogForPage0', 5);
 
 //deb($mainPageProds);
 
@@ -18,8 +9,6 @@ $mainPageProds = $category->checkCatalogData('catalogForPage0', 5);
 <section class="s-products">
     <div class="container">
         <?php foreach($mainPageProds as $k => $prodLine):?>
-
-
             <div class="tab-wrap">
 
                 <div class="products-title-cover">

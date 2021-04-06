@@ -9,21 +9,18 @@ function getSliderGoods(){
 
     foreach ($prods as $k => $prod){
         //правильные картинки
-        // $src = getImgForShowcaseProdunct($prod['prod_id']);
-        // $prods[$k]['src'] = $src;
+         $img = addImgToProd($prod['prod_id']);
+         $prods[$k]['img'] = $img;
         //случайные картинки
-        $img = getRandomIng();
-        $prods[$k]['img'] = $img;
+        //$img = getRandomIng();
+        //$prods[$k]['img'] = $img;
     }
-
 
     return $prods;
 
 }
 
-function addImgToProd(){
 
-}
 
 $slider_goods = getSliderGoods();
 //deb($slider_goods);

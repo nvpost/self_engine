@@ -183,6 +183,20 @@ function getRandomIng($item = false){
 }
 
 
+function addImgToProd($prod_id, $all=false){
+//    global $db;
+//    $sql = "SELECT * FROM img WHERE prod_id=".$prod_id;
+//    $imgs_res = $db->query($sql);
+//    if($all){
+//        $imgs = $imgs_res->fetchAll(PDO::FETCH_ASSOC);
+//    }else{
+//        $imgs = $imgs_res->fetch(PDO::FETCH_ASSOC);
+//    }
+    $imgs = getRandomIng();
+    return $imgs;
+}
+
+
 
 
 ?>

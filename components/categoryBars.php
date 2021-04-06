@@ -1,23 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: n.balashov
- * Date: 24.03.2021
- * Time: 14:21
- */
-//foreach ($rootCats as $k => $bar){
-//
-//    // func addImgToCats($id)
-//    $img = getRandomIng();
-//    $rootCats[$k]['img'] = $img;
-//    deb($rootCats[$k]);
-//}
 
 function drowCategoryBar($item){
-    $img = getRandomIng();
+
+    $n = rand(0, count($item['prods'])-1);
+
+    $img = $item['prods'][$n]['img']['src'];
     $category_bar_html ="<div class='slide-categ-bicycle'>
                 <div class='categ-bicycle-item'>
-                    <img src='img/".$img['src']."' alt='category'>
+                    <img src='img/".$img."' alt='category'>
                     <div class='categ-bicycle-info'>
                         <h4 class='title'>{$item['label']}</h4>
                         <a href='shop.html' class='btn'><span>Перейти</span></a>
@@ -32,7 +22,7 @@ function drowCategoryBar($item){
     <div class="container">
         <div class="slider-categ-bicycle">
 
-            <?php foreach ($rootCats as $k => $item):?>
+            <?php foreach ($mainPageProds as $k => $item):?>
                 <?=drowCategoryBar($item)?>
             <?php endforeach;?>
         </div>

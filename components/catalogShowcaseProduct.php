@@ -1,9 +1,10 @@
 <?php
 
 function drowShowcaseProduct($item){
+    //deb($item);
     global $home_url;
     $product_link = $home_url."noz/".str_replace([' ', '.'], ['_', ''], $item['name']);
-    $img = getRandomIng();
+    $img = $item['img'];
     //deb($img);
 
 $productHtml = "
@@ -12,7 +13,9 @@ $productHtml = "
             <li><a href='#'><i class='fa fa-refresh' aria-hidden='true'></i></a></li>
             <li><a href='#'><i class='fa fa-heart' aria-hidden='true'></i></a></li>
         </ul>
-        <a href='{$product_link}' class='product-img'><img class='lazy' src='{$home_url}img/{$img['src']}' data-src='img/{$img['src']}' alt='{$item['name']}'></a>
+        <a href='{$product_link}' class='product-img'>
+            <img class='lazy' src='{$home_url}img/{$img['src']}' data-src='img/{$img['src']}' alt='{$img['title']}'>
+        </a>
         <div class='product-item-cover'>
             <div class='price-cover'>
                 <div class='new-price'>{$item['price']}</div>

@@ -14,6 +14,19 @@ doHeader($heatTitle, $headDesrc);
         require_once 'components/slider.php';
     ?>
     <?php
+        $parent_id = 0;
+        require_once "classes/CatalogClass.php";
+
+        require_once 'components/catalogShowcaseProduct.php';
+
+        $category = new CatalogClass(0);
+
+
+        $mainPageProds = $category->checkCatalogData('catalogForPage0', 5);
+
+        //deb($mainPageProds);
+
+
         require_once 'components/categoryBars.php';
     ?>
     <?php
