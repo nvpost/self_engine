@@ -112,6 +112,7 @@ require './catsAndProdsShowcase.php';
 <?php
 $time_log = 't: '.round(microtime(true) - $time_start, 4).'s.';
 c_deb($time_log);
+console.log('nm')
 ?>
 
 </body>
