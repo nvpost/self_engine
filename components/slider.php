@@ -49,13 +49,13 @@ function doSliderItem($item){
                     </div>
                     <div class='slide-img-cover'>
                         <a href='single-shop.html' class='lable-bike'>
-                            <div class='lable-bike-img'><img src='img/{$item['img']['src']}' alt='img'></div>
+                            <div class='lable-bike-img'><img src='{$home_url}img/{$item['img']['src']}' alt='img'></div>
                             <div class='lable-bike-item'>
                                 <div class='model'>{$item['vendor']}</div>
                                 <div class='price'>{$item['price']}</div>
                             </div>
                         </a>
-                        <img src='img/".$item['img']['src']."' alt='img' class='slide-img'>
+                        <img src='{$home_url}img/".$item['img']['src']."' alt='img' class='slide-img'>
                     </div>
                 </div>
             </div>";
