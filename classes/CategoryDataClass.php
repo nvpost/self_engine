@@ -11,15 +11,15 @@ class CategoryDataClass
     public $cat_id;
     public $label;
     public $categoryData; //array
-    public $parentCats; //array
     public $childCats; //array
+    public $parentCats; //array
 
     public function __construct($label)
     {
         $this->label = $label;
 
         $this->categoryData = $this->getCategoryPageCat();
-        $this->label = $this->categoryData['cat_id'];
+        $this->cat_id = $this->categoryData['cat_id'];
         $this->childCats = $this->getChildCats();
         $this->parentCats = $this->getParentCats();
     }
@@ -47,7 +47,7 @@ class CategoryDataClass
     function getParentCats(){
         global $db;
         if($this->categoryData['parent_id']){
-            $cId = $this->categoryData['perent_id'];
+            $cId = $this->categoryData['parent_id'];
             $sql = "SELECT * FROM category WHERE cat_id='".$cId."'";
             $res_parentCats = $db->query($sql);
             if($res_parentCats){

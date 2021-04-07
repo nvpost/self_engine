@@ -13,9 +13,10 @@ $db_label = str_replace('_', ' ', $cacheName);
 //название кэша и название класса
 $catPageData = checkClassCache($db_label, 'CategoryDataClass');
 //deb($catPageData);
-deb($catPageData->cat_id);
-deb($catPageData->label);
-deb($catPageData->categoryData);
+//deb($catPageData->cat_id);
+//deb($catPageData->label);
+//deb($catPageData->categoryData);
+//deb($catPageData->parentCats);
 //deb($catPageData->childCats);
 
 
@@ -30,17 +31,17 @@ doHeader($heatTitle, $headDescr);
 ?>
 
 <!-- ================ HEADER-TITLE ================ -->
-<section class="s-header-title">
-    <div class="container">
-        <h1>Shop</h1>
-        <ul class="breadcrambs">
-            <li><a href="index.php">Home</a></li>
-            <li>Shop</li>
-        </ul>
-    </div>
-</section>
+<?php
+    require_once 'components/category/breadCrambs.php';
+?>
 <!-- ============== HEADER-TITLE END ============== -->
 
+<!-- ============== Slider ============== -->
+<?php
+    $categorySlider = $catPageData->cat_id;
+    require_once 'components/slider.php';
+?>
+<!-- ============== Slider END ============== -->
 <!--===================== SHOP =====================-->
 <section class="s-shop">
     <div class="container">

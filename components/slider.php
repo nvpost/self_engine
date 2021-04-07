@@ -2,7 +2,14 @@
 
 function getSliderGoods(){
     global $db;
-    $sql = "SELECT * FROM products ORDER BY RAND() LIMIT 10";
+    global $categorySlider;
+    if($categorySlider){
+        //deb()
+        $sql = "SELECT * FROM products WHERE category_id={$categorySlider} ORDER BY RAND() LIMIT 10";
+    }else{
+        $sql = "SELECT * FROM products ORDER BY RAND() LIMIT 10";
+    }
+
 
     $prod_res = $db->query($sql);
     $prods = $prod_res->fetchAll(PDO::FETCH_ASSOC);
@@ -28,8 +35,9 @@ $slider_goods = getSliderGoods();
 
 function doSliderItem($item){
     //deb($item);
+    global $home_url;
     $desr = mb_substr($item['descr'],0,100);
-    $prod_link = "noz/".str_replace([' ', '.'], ['_', ''], $item['name']);
+    $prod_link = $home_url."noz/".str_replace([' ', '.'], ['_', ''], $item['name']);
     $slideHtml = "<div class='main-slide'>
                 <div class='main-slide-bg' style='background-image: url(assets/img/bg-slider.svg);'></div>
                 <div class='container'>
