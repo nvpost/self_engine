@@ -2,16 +2,17 @@
 
 
 <?php
-
-
-?>
-
-
-
-<?php
+require_once 'classes/TovarDataClass.php';
 
 $cacheName = $_GET['noz'];
 $db_label = str_replace('_', ' ', $cacheName);
+
+$tovar = new TovarDataClass($cacheName );
+
+deb($tovar->tovar);
+deb($tovar->tovarCat);
+//deb($tovar->tovarCacheName);
+
 
 function getTovar($db_label){
     global $db;
