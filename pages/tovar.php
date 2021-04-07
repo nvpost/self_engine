@@ -7,40 +7,41 @@ require_once 'classes/TovarDataClass.php';
 $cacheName = $_GET['noz'];
 $db_label = str_replace('_', ' ', $cacheName);
 
-$tovar = new TovarDataClass($cacheName );
+//добавить кеш
+$tovarObj = new TovarDataClass($cacheName );
 
-deb($tovar->tovar);
-deb($tovar->tovarCat);
+deb($tovarObj->tovar);
+deb($tovarObj->tovarCat);
 //deb($tovar->tovarCacheName);
 
 
-function getTovar($db_label){
-    global $db;
-    $sql = "SELECT * FROM products WHERE name='".$db_label."'";
-    $prod = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-    $prod['cat_info'] = getCat($prod['category_id']);
-//    $prod['imgs'][0] = getRandomIng();
-//    $prod['imgs'][1] = getRandomIng();
-//    $prod['imgs'][2] = getRandomIng();
-    return $prod;
-}
-function getCat($catId){
-    global $db;
-    $sql = "SELECT * FROM category WHERE cat_id='".$catId."'";
-    $cat= $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-    return $cat;
-}
+//function getTovar($db_label){
+//    global $db;
+//    $sql = "SELECT * FROM products WHERE name='".$db_label."'";
+//    $prod = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+//    $prod['cat_info'] = getCat($prod['category_id']);
+////    $prod['imgs'][0] = getRandomIng();
+////    $prod['imgs'][1] = getRandomIng();
+////    $prod['imgs'][2] = getRandomIng();
+//    return $prod;
+//}
+//function getCat($catId){
+//    global $db;
+//    $sql = "SELECT * FROM category WHERE cat_id='".$catId."'";
+//    $cat= $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+//    return $cat;
+//}
 
 //добавить кеш
-$tovar = getTovar($db_label);
+//$tovar = getTovar($db_label);
 
 //deb($tovar);
 
-$heatTitle = $db_label."|".$tovar['cat_info']['label'].". Купить - ".number_format($tovar['price'], 0, '', ' '). " руб.";
+$heatTitle = $tovarObj->tovarName."|".$tovarObj->tovarCat['label'].". Купить - ".numFormat($tovarObj->tovar['price']);
 $desrcTile = "Огромный выбор ножей самых известных производителей";
 
-$headRequired = "Купить ".$db_label." - ".number_format($tovar['price'], 0, '', ' ');
-$headProdDesrc=$tovar['descr'];
+$headRequired = "Купить ".$tovarObj->tovarName." - ".numFormat($tovarObj->tovar['price']);
+$headProdDesrc=$tovarObj->tovar['descr'];
 
 $headDescr = $headRequired.". ".$headProdDesrc;
 

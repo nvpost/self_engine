@@ -225,6 +225,10 @@ function doUrl($str){
     return str_replace(' ', '_', $str);
 }
 
+function numFormat($p){
+    return number_format($p, 0, '', ' '). " руб.";
+}
+
 
 
 ?>
