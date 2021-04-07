@@ -10,9 +10,11 @@ class CategoryDataClass
 {
     public $cat_id;
     public $label;
+    public $parent_id;
     public $categoryData; //array
     public $childCats; //array
     public $parentCats; //array
+    public $neighbor; //array
 
     public function __construct($label)
     {
@@ -20,8 +22,10 @@ class CategoryDataClass
 
         $this->categoryData = $this->getCategoryPageCat();
         $this->cat_id = $this->categoryData['cat_id'];
+        $this->parent_id = $this->categoryData['parent_id'];
         $this->childCats = $this->getChildCats();
         $this->parentCats = $this->getParentCats();
+        $this->neighbor = $this->getNeighborCats();
     }
 
     function getCategoryPageCat(){
@@ -47,14 +51,19 @@ class CategoryDataClass
     function getParentCats(){
         global $db;
         if($this->categoryData['parent_id']){
-            $cId = $this->categoryData['parent_id'];
-            $sql = "SELECT * FROM category WHERE cat_id='".$cId."'";
+            $sql = "SELECT * FROM category WHERE cat_id='".$this->parent_id."'";
             $res_parentCats = $db->query($sql);
             if($res_parentCats){
                 $parentCats = $res_parentCats->fetchAll(PDO::FETCH_ASSOC);
             }
             return $parentCats;
         }
+    }
+    public function getNeighborCats(){
+        global $db;
+        $sql = "SELECT * FROM category WHERE parent_id='".$this->parent_id."'";
+        $childCats = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $childCats;
     }
 
 }

@@ -8,8 +8,8 @@ function doFirstLevel($menu_item){
         $li_class = " class='dropdown'";
     }
     $li_item = "<li $li_class>";
-    $cat_link = str_replace([' ', '.'], ['_', ''], $menu_item['label']);
-    $li_item .= "<a href='".$home_url."category/".$cat_link."'>".$menu_item['label'];
+
+    $li_item .= "<a href='".$home_url."category/".doUrl($menu_item['label'])."'>".$menu_item['label'];
     if($li_class){
         $li_item .= "<i class='fa fa-angle-down' aria-hidden='true'></i>";
     }

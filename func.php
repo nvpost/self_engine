@@ -119,24 +119,24 @@ function addImgToCats($id){
 }
 
 
-function doUrl($g){
-    //$g = $_GET['cat|noz']
-    global $cat_limit;
-
-    if(strpos($g, '/')&&explode('/', $g)[1]!=""){
-        $exploded_url = explode('/', $g);
-        $routeArray['cacheName'] = $exploded_url[0].$exploded_url[1];
-        $routeArray['pure_cat_label'] = $exploded_url[0];
-        $routeArray['offset'] = ($exploded_url[1]-1)*$cat_limit;;
-        //echo "покажем категорию ".$exploded_url[0]." и отступ ".$exploded_url[1];
-        //echo "<br> Товары с ".($exploded_url[1]-1)*$cat_limit." по ".$exploded_url[1]*$cat_limit;
-    }else{
-        $cacheName = str_replace("/", "", $g);
-        $routeArray['cacheName'] = $cacheName;
-        $routeArray['pure_cat_label'] = $cacheName;
-    }
-    return $routeArray;
-}
+//function doUrl11($g){
+//    //$g = $_GET['cat|noz']
+//    global $cat_limit;
+//
+//    if(strpos($g, '/')&&explode('/', $g)[1]!=""){
+//        $exploded_url = explode('/', $g);
+//        $routeArray['cacheName'] = $exploded_url[0].$exploded_url[1];
+//        $routeArray['pure_cat_label'] = $exploded_url[0];
+//        $routeArray['offset'] = ($exploded_url[1]-1)*$cat_limit;;
+//        //echo "покажем категорию ".$exploded_url[0]." и отступ ".$exploded_url[1];
+//        //echo "<br> Товары с ".($exploded_url[1]-1)*$cat_limit." по ".$exploded_url[1]*$cat_limit;
+//    }else{
+//        $cacheName = str_replace("/", "", $g);
+//        $routeArray['cacheName'] = $cacheName;
+//        $routeArray['pure_cat_label'] = $cacheName;
+//    }
+//    return $routeArray;
+//}
 
 
 function checkPagination($visiableItems, $itemCounter){
@@ -220,6 +220,11 @@ function checkClassCache($cacheName, $className){
     }
     return $catPageData;
 }
+
+function doUrl($str){
+    return str_replace(' ', '_', $str);
+}
+
 
 
 ?>

@@ -10,7 +10,7 @@
             <li><a href="<?=$home_url;?>/index.php">Домой</a></li>
             <?php if($catPageData->parentCats){
                 $c = $catPageData->parentCats[0]['label'];
-                echo "<li><a href='".$home_url.$c."'>{$c}</a></li>";
+                echo "<li><a href='".$home_url."category/".$c."'>{$c}</a></li>";
             }?>
 
         </ul>

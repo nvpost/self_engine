@@ -38,8 +38,9 @@ doHeader($heatTitle, $headDescr);
 
 <!-- ============== Slider ============== -->
 <?php
+    //deb($catPageData->childCats);
     $categorySlider = $catPageData->cat_id;
-    require_once 'components/slider.php';
+    //require_once 'components/slider.php';
 ?>
 <!-- ============== Slider END ============== -->
 <!--===================== SHOP =====================-->
@@ -47,65 +48,12 @@ doHeader($heatTitle, $headDescr);
     <div class="container">
         <div class="shop-sidebar-btn btn"><span>filter</span></div>
         <div class="row">
-            <div class="col-12 col-lg-3 shop-sidebar">
-                <ul class="widgets wigets-shop">
-                    <li class="widget wiget-cart">
-                        <h5 class="title">Cart</h5>
-                        <p class="not-product">No products in the cart.</p>
-                    </li>
-                    <li class="widget wiget-shop-category">
-                        <h5 class="title">bikes</h5>
-                        <ul>
-                            <li><p><input type="checkbox" checked><span>Road Bike</span></p></li>
-                            <li><p><input type="checkbox"><span>Mountain Bike</span></p></li>
-                            <li><p><input type="checkbox"><span>BMX Bike</span></p></li>
-                            <li><p><input type="checkbox"><span>City Bike</span></p></li>
-                            <li><p><input type="checkbox"><span>Kids Bike</span></p></li>
-                        </ul>
-                    </li>
-                    <li class="widget wiget-price">
-                        <h5 class="title">price($)</h5>
-                        <div id="slider-range"></div>
-                        <div class="amount-cover">
-                            <input type="text" id="amount-min">
-                            <span>&mdash;</span>
-                            <input type="text" id="amount-max">
-                        </div>
-                    </li>
-                    <li class="widget wiget-gender">
-                        <h5 class="title">gender</h5>
-                        <ul>
-                            <li><p><input type="checkbox"><span>Men’s</span></p></li>
-                            <li><p><input type="checkbox"><span>Women’s</span></p></li>
-                            <li><p><input type="checkbox"><span>Kids</span></p></li>
-                        </ul>
-                    </li>
-                    <li class="widget wiget-brand">
-                        <h5 class="title">brand</h5>
-                        <ul>
-                            <li><p><input type="checkbox"><span>Focus</span></p></li>
-                            <li><p><input type="checkbox"><span>Radon</span></p></li>
-                            <li><p><input type="checkbox"><span>Cube</span></p></li>
-                            <li><p><input type="checkbox"><span>Bikes</span></p></li>
-                            <li><p><input type="checkbox"><span>Cruzee</span></p></li>
-                        </ul>
-                    </li>
-                    <li class="widget wiget-color">
-                        <h5 class="title">color</h5>
-                        <ul>
-                            <li style="background: #f3deca"></li>
-                            <li style="background: #fa9483"></li>
-                            <li style="background: #2d4057"></li>
-                            <li style="background: #4097aa"></li>
-                            <li style="background: #0ac693"></li>
-                            <li style="background: #0c5061"></li>
-                            <li style="background: #f74440"></li>
-                            <li style="background: #e0e44a"></li>
-                        </ul>
-                    </li>
-                </ul>
-                <a href="#" class="reset-filter-btn">Reset Filters</a>
-            </div>
+
+            <?php
+                $childCats = $catPageData->childCats;
+                $CatLabel = $catPageData->label;
+                require_once 'components/category/leftMenuWidget.php';
+            ?>
             <div class="col-12 col-lg-9 shop-cover">
                 <div class="baner-shop">
                     <span class="mask"></span>
