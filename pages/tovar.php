@@ -13,17 +13,14 @@
 $cacheName = $_GET['noz'];
 $db_label = str_replace('_', ' ', $cacheName);
 
-
-
-
 function getTovar($db_label){
     global $db;
     $sql = "SELECT * FROM products WHERE name='".$db_label."'";
     $prod = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
     $prod['cat_info'] = getCat($prod['category_id']);
-    $prod['imgs'][0] = getRandomIng();
-    $prod['imgs'][1] = getRandomIng();
-    $prod['imgs'][2] = getRandomIng();
+//    $prod['imgs'][0] = getRandomIng();
+//    $prod['imgs'][1] = getRandomIng();
+//    $prod['imgs'][2] = getRandomIng();
     return $prod;
 }
 function getCat($catId){

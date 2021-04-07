@@ -1,4 +1,32 @@
 <?php
+require_once 'classes/CategoryDataClass.php';
+
+$cacheName = $_GET['cat'];
+$db_label = str_replace('_', ' ', $cacheName);
+
+
+//добавить кеш
+
+
+
+
+//название кэша и название класса
+$catPageData = checkClassCache($db_label, 'CategoryDataClass');
+//deb($catPageData);
+deb($catPageData->cat_id);
+deb($catPageData->label);
+deb($catPageData->categoryData);
+//deb($catPageData->childCats);
+
+
+$heatTitle = $db_label." | Интернет магазин ножей";
+$headDescr = $db_label.". Огромный выбор ножей самых известных производителей";
+
+doHeader($heatTitle, $headDescr);
+?>
+
+<?
+    require_once 'components/afterHead.php';
 ?>
 
 <!-- ================ HEADER-TITLE ================ -->

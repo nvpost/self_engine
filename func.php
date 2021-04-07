@@ -198,6 +198,29 @@ function addImgToProd($prod_id, $all=false){
 
 
 
+// принимает название кеша и название класса
+// TODO все переписать под эту функцию
+function checkClassCache($cacheName, $className){
+    // Название кеша - каталог с количеством
+    //deb($cacheName);
+    $dataCache = new DataCache($cacheName);
+    $getDataFromCache = $dataCache->initCacheData();
+
+    if ($getDataFromCache) {
+        // Получаем кэшированные данные из кэша
+        //echo "из cache";
+        $catPageData = $dataCache->getCacheData();
+        //deb($products);
+    } else {
+        // Исполняем этот код, если кеширование отключено или данные в кеше старые
+        //echo "Новый список товаров";
+        $catPageData = new $className($cacheName);
+        //     Обновляем данные в кэше
+        $dataCache->updateCacheData($catPageData);
+    }
+    return $catPageData;
+}
+
 
 ?>
 

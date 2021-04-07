@@ -23,11 +23,8 @@ require './catsAndProdsShowcase.php';
             require_once 'pages/tovar.php';
 
          }
-         if(isset($_GET['category'])){
-             deb("Страница категории");
-         }
          if(isset($_GET['cat'])){
-             deb("Страница категории - ".$_GET['cat']);
+             require_once 'pages/category.php';
          }
      }
 
@@ -112,7 +109,6 @@ require './catsAndProdsShowcase.php';
 <?php
 $time_log = 't: '.round(microtime(true) - $time_start, 4).'s.';
 c_deb($time_log);
-console.log('nm')
 ?>
 
 </body>

@@ -1,6 +1,7 @@
 <?php
 require __DIR__.'/func.php';
 include_once(__DIR__.'/classes/DataCache.php');
+//require_once __DIR__.'/classes/CategoryDataClass.php';
 //require './classes/DataCache.php';
 
 
