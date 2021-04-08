@@ -10,32 +10,11 @@ $db_label = str_replace('_', ' ', $cacheName);
 //добавить кеш
 $tovarObj = new TovarDataClass($cacheName );
 
-deb($tovarObj->tovar);
-deb($tovarObj->tovarCat);
+//deb($tovarObj->tovar);
+//deb($tovarObj->tovarCat);
+//deb($tovarObj->parentCat);
 //deb($tovar->tovarCacheName);
 
-
-//function getTovar($db_label){
-//    global $db;
-//    $sql = "SELECT * FROM products WHERE name='".$db_label."'";
-//    $prod = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-//    $prod['cat_info'] = getCat($prod['category_id']);
-////    $prod['imgs'][0] = getRandomIng();
-////    $prod['imgs'][1] = getRandomIng();
-////    $prod['imgs'][2] = getRandomIng();
-//    return $prod;
-//}
-//function getCat($catId){
-//    global $db;
-//    $sql = "SELECT * FROM category WHERE cat_id='".$catId."'";
-//    $cat= $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-//    return $cat;
-//}
-
-//добавить кеш
-//$tovar = getTovar($db_label);
-
-//deb($tovar);
 
 $heatTitle = $tovarObj->tovarName."|".$tovarObj->tovarCat['label'].". Купить - ".numFormat($tovarObj->tovar['price']);
 $desrcTile = "Огромный выбор ножей самых известных производителей";
@@ -62,6 +41,9 @@ doHeader($heatTitle, $headDescr);
 
 <!-- ================ HEADER-TITLE ================ -->
 <?php
+    $p_cat = $tovarObj->parentCat;
+    $current_cat = $tovarObj->tovarCat;
+    $name = $tovarObj->tovarName;
     require_once "components/tovar/headBreadcrambs.php"
 ?>
 <!-- ============== HEADER-TITLE END ============== -->
@@ -72,6 +54,7 @@ doHeader($heatTitle, $headDescr);
         <div class="row">
             <!--===== SLIDER-SINGLE-FOR =====-->
             <?php
+                $tovar = $tovarObj->tovar;
                 require_once 'components/tovar/tovarSlider.php';
             ?>
             <!--=== SLIDER-SINGLE-FOR END ===-->
@@ -95,6 +78,8 @@ doHeader($heatTitle, $headDescr);
 <!--=============== RELATED PRODUCTS ===============-->
 <section class="s-related-products">
     <?php
+        $parent_cat_id = $tovarObj->parentCat['cat_id'];
+        $cat_label = $tovarObj->parentCat['label'];
         require_once "components/tovar/relatedProducts.php";
     ?>
 </section>

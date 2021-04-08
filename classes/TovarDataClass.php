@@ -8,6 +8,12 @@ class TovarDataClass
     public $tovarCacheName;
     public $prod_id;
     public $tovarCat; // array
+    public $parentCat;
+//    public $relatedVendor;
+//    public $relatedForPrice;
+//    public $relatedForCat;
+
+    public $limit;
 
 
     public function __construct($cacheName){
@@ -15,6 +21,11 @@ class TovarDataClass
         $this->tovarName =  str_replace('_', ' ', $cacheName);
         $this->tovar = $this->getTovar();
         $this->tovarCat = $this->getTovarCat($this->tovar['category_id']);
+        $this->parentCat = $this->getParentCat($this->tovarCat['parent_id']);
+////        $this->relatedVendor = $this->getRelatedVendor($this->tovar['vendor']);
+//        $this->relatedForPrice = $this->getRelatedForPrice($step=0.3);
+//        $this->relatedForCat =  $this->getRelatedForCat($this->tovar['category_id']);
+//        $this->limit = 8;
     }
 
 
@@ -47,4 +58,44 @@ class TovarDataClass
         $cat= $db->query($sql)->fetch(PDO::FETCH_ASSOC);
         return $cat;
     }
+
+    public function getParentCat($parentCatId)
+    {
+        global $db;
+        $sql = "SELECT * FROM category WHERE cat_id='".$parentCatId."'";
+        $cat= $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        return $cat;
+    }
+
+//    related_products
+
+
+    public function getRelatedVendor($vendor){
+        global $db;
+        deb($vendor);
+        $sql = "SELECT * FROM products WHERE vendor='".$vendor."' ORDER BY RAND() LIMIT $this->limit";
+        $relatedProds = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
+        return $relatedProds;
+    }
+
+    public function getRelatedForPrice($step=0.3){
+        global $db;
+
+        $min = $this->price*(1-$step);
+        $max = $this->price*(1+$step);
+        $sql = "SELECT * FROM products WHERE price between '".$min."' AND '".$max."' ORDER BY RAND() LIMIT $this->limit";
+        $relatedProds = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
+        return $relatedProds;
+    }
+
+    public function getRelatedForCat($cId){
+        global $db;
+        $sql = "SELECT * FROM products WHERE category_id='".$cId."' ORDER BY RAND() LIMIT $this->limit";
+        $relatedProds = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
+        return $relatedProds;
+    }
+
 }

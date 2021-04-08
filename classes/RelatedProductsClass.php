@@ -16,44 +16,39 @@ class RelatedProductsClass
     public $price;
     public $limit;
 
-    public function __construct($tovar)
+    public function __construct($tovar, $parent_cat_id, $cat_label)
     {
         $this->prod_id = $tovar['prod_id'];
         $this->vendor = $tovar['vendor'];
         $this->cat_id = $tovar['category_id'];
-        $this->parent_cat_id = $tovar['cat_info']['parent_id'];
-        $this->cat_label = $tovar['cat_info']['label'];
+        $this->parent_cat_id = $parent_cat_id;
+        $this->cat_label = $cat_label;
         $this->price = $tovar['price'];
         $this->limit = 8;
     }
 
+
+
     public function getRelatedVendor(){
-        global $db;
-
         $sql = "SELECT * FROM products WHERE vendor='".$this->vendor."' ORDER BY RAND() LIMIT $this->limit";
-        $relatedProds = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-
-        return $relatedProds;
+        $relatedVendor = querySQLandImg($sql,true,true);
+        //deb($relatedVendor);
+        return $relatedVendor;
     }
 
     public function getRelatedForPrice($step=0.3){
-        global $db;
-
         $min = $this->price*(1-$step);
         $max = $this->price*(1+$step);
-        //deb('от '.$min. ' до '. $max);
-        //$sql = "SELECT * FROM products WHERE price>'".$min."' AND price<'".$max."'  LIMIT $this->limit ORDER BY RAND()";
         $sql = "SELECT * FROM products WHERE price between '".$min."' AND '".$max."' ORDER BY RAND() LIMIT $this->limit";
-        $relatedProds = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
+        $relatedProds = querySQLandImg($sql,true,true);
 
         return $relatedProds;
     }
 
     public function getRelatedForCat(){
-        global $db;
         $sql = "SELECT * FROM products WHERE category_id='".$this->cat_id."' ORDER BY RAND() LIMIT $this->limit";
-        $relatedProds = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-
+        $relatedProds = querySQLandImg($sql,true,true);
         return $relatedProds;
     }
 }

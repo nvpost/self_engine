@@ -182,6 +182,33 @@ function getRandomIng($item = false){
     return($img);
 }
 
+//
+//Запрос в бд и получение картинок
+//
+function querySQLandImg($sql, $all=true, $getImgs = true){
+    global $db;
+    $res = $db->query($sql);
+    if($res){
+        if($all){
+            $res_data = $res->fetchALL(PDO::FETCH_ASSOC);
+        }else{
+            $res_data = $res->fetch(PDO::FETCH_ASSOC);
+        }
+
+        if($getImgs){
+            $res_data = loopProdsForImg($res_data);
+        }
+    }
+    return $res_data;
+}
+
+function loopProdsForImg($item){
+    foreach ($item as $k => $p){
+        $item[$k]['img']=addImgToProd($p['prod_id'], true);
+    }
+    return $item;
+}
+
 
 function addImgToProd($prod_id, $all=false){
     global $db;
@@ -195,6 +222,10 @@ function addImgToProd($prod_id, $all=false){
     //$imgs = getRandomIng();
     return $imgs;
 }
+
+//
+//Запрос в бд и получение картинок
+//
 
 
 

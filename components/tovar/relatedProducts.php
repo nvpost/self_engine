@@ -3,7 +3,7 @@
 require_once 'classes/RelatedProductsClass.php';
 require_once 'components/catalogShowcaseProduct.php';
 
-$relatedProducts = new RelatedProductsClass($tovar);
+$relatedProducts = new RelatedProductsClass($tovar, $parent_cat_id, $cat_label);
 
 $relatedVendorProducts = $relatedProducts->getRelatedVendor();
 
@@ -16,6 +16,7 @@ $relatedForCat = $relatedProducts->getRelatedForCat();
 ?>
 
 <div class="container">
+
     <h2 class="title">Товары производителя <?=$tovar['vendor']?></h2>
     <div class="row product-cover">
             <?php foreach ($relatedVendorProducts as $item):?>

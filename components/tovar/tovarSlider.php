@@ -24,7 +24,7 @@ function drowSlideNav($slide){
 ?>
 <div class="col-12 col-md-5">
     <div class="slider-single-for">
-        <?php foreach ($tovar['imgs'] as $slide):?>
+        <?php foreach ($tovar['img'] as $slide):?>
             <?=drowSlide($slide);?>
         <?php endforeach;?>
     </div>
@@ -32,7 +32,7 @@ function drowSlideNav($slide){
     <!--=== SLIDER-SINGLE-FOR END ===-->
     <!--===== SLIDER-SINGLE-NAV =====-->
     <div class="slider-single-nav  slick-slider">
-        <?php foreach ($tovar['imgs'] as $slide):?>
+        <?php foreach ($tovar['img'] as $slide):?>
              <div class="slide-single-nav slick-slide" role="option">
                    <?=drowSlideNav($slide);?>
              </div>
