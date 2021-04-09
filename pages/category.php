@@ -25,6 +25,15 @@ $heatTitle = $db_label." | Интернет магазин ножей";
 $headDescr = $db_label.". Огромный выбор ножей самых известных производителей";
 
 doHeader($heatTitle, $headDescr);
+
+function drowNeighborCatsStr($item){
+    global $home_url;
+    return "<span='neighbor'>
+                <a href='{$home_url}category/{$item['label']}'>
+                    {$item['label']}
+                </a> /
+            </span>";
+}
 ?>
 
 <?
@@ -53,8 +62,11 @@ doHeader($heatTitle, $headDescr);
             <?php
                 $childCats = $catPageData->childCats;
                 $CatLabel = $catPageData->label;
-                require_once 'components/category/leftMenuWidget.php';
+                $neighborCats = $catPageData->neighbor;
+                $parentLabel = $catPageData->parentCats[0]['label'];
+                require 'components/category/leftMenuWidget.php';
             ?>
+
             <div class="col-12 col-lg-9 shop-cover">
                 <h2 class="title">
                     <?=$catPageData->label?>
@@ -82,6 +94,11 @@ doHeader($heatTitle, $headDescr);
                 <div class="shop-product-cover">
                     <div class="row product-cover block">
                         <?php $catClass = "col-12 col-sm-4 prod-item-col";?>
+                        <div class="neighborCats">
+                            <?php foreach ($catPageData->neighbor as $item):?>
+                                <?=drowNeighborCatsStr($item)?>
+                            <?php endforeach?>
+                        </div>
                         <?php foreach ($catPageData->prods as $item):?>
                             <?=drowShowcaseProduct($item, $catClass)?>
                         <?php endforeach;?>
