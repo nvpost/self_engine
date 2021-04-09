@@ -1,5 +1,6 @@
 <?php
 require_once 'classes/CategoryDataClass.php';
+require_once 'components/catalogShowcaseProduct.php';
 
 $cacheName = $_GET['cat'];
 $db_label = str_replace('_', ' ', $cacheName);
@@ -55,22 +56,13 @@ doHeader($heatTitle, $headDescr);
                 require_once 'components/category/leftMenuWidget.php';
             ?>
             <div class="col-12 col-lg-9 shop-cover">
-                <div class="baner-shop">
-                    <span class="mask"></span>
-                    <img src="assets/img/banner-shop.jpg" alt="img">
-                    <div class="baner-item-content">
-                        <h2>our discount program</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmmpor incididunt ut labore et dolore magna aliqua.</p>
-                        <a href="single-shop.html" class="btn"><span>read more</span></a>
-                        <div class="banner-sale-cover">
-                            <div class="banner-sale">30% off</div>
-                            <p>Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="title">road bike</h2>
+                <h2 class="title">
+                    <?=$catPageData->label?>
+                </h2>
                 <div class="shop-sort-cover">
-                    <div class="sort-left">120 products found</div>
+                    <div class="sort-left">
+                        Найлено: <?=count($catPageData->prods)?> товаров
+                    </div>
                     <div class="sort-right">
                         <div class="sort-by">
                             <span class="sort-name">sort by:</span>
@@ -89,255 +81,10 @@ doHeader($heatTitle, $headDescr);
                 </div>
                 <div class="shop-product-cover">
                     <div class="row product-cover block">
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <span class="top-sale">top sale</span>
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-1.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                            <div class="old-price">$1.799</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">Granite Peak 24" <br>Girls Mountain Bike</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-2.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">Hyper E-Ride Bike 700C <br>20+ Mile Range</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <span class="sale">11%</span>
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-3.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                            <div class="old-price">$1.799</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">Lightweight M370-27speed <br>Aluminum Alloy Mantis</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-4.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">New Spring Beach Cruiser <br>Bicycle Chrome</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-5.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">Granite Peak 24" <br>Girls Mountain Bike</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-6.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">Aluminum and Fork <br>Mountain Sr-26omg</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-7.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">Steel Frame MTB Bike <br>with 21 Speed</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-8.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">Leopard Rider No Chain <br>Mountain Bicycle</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 prod-item-col">
-                            <div class="product-item">
-                                <span class="sale">11%</span>
-                                <ul class="product-icon-top">
-                                    <li><a href="#"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                </ul>
-                                <a href="single-shop.html" class="product-img"><img src="assets/img/prod-3.png" alt="product"></a>
-                                <div class="product-item-wrap">
-                                    <div class="product-item-cover">
-                                        <div class="price-cover">
-                                            <div class="new-price">$1.699</div>
-                                            <div class="old-price">$1.799</div>
-                                        </div>
-                                        <h6 class="prod-title"><a href="single-shop.html">Lightweight M370-27speed <br>Aluminum Alloy Mantis</a></h6>
-                                        <a href="single-shop.html" class="btn"><span>buy now</span></a>
-                                    </div>
-                                    <div class="prod-info">
-                                        <ul class="prod-list">
-                                            <li>Frame Size: <span>17</span></li>
-                                            <li>Class: <span>City</span></li>
-                                            <li>Number of speeds: <span>7</span></li>
-                                            <li>Type: <span>Rigid</span></li>
-                                            <li>Country registration: <span>USA</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php $catClass = "col-12 col-sm-4 prod-item-col";?>
+                        <?php foreach ($catPageData->prods as $item):?>
+                            <?=drowShowcaseProduct($item, $catClass)?>
+                        <?php endforeach;?>
                     </div>
                     <div class="pagination-cover">
                         <ul class="pagination">

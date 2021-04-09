@@ -15,6 +15,7 @@ class CategoryDataClass
     public $childCats; //array
     public $parentCats; //array
     public $neighbor; //array
+    public $prods; //array
 
     public function __construct($label)
     {
@@ -26,6 +27,7 @@ class CategoryDataClass
         $this->childCats = $this->getChildCats();
         $this->parentCats = $this->getParentCats();
         $this->neighbor = $this->getNeighborCats();
+        $this->prods = $this->getProds($this->categoryData['cat_id']);
     }
 
     function getCategoryPageCat(){
@@ -41,29 +43,33 @@ class CategoryDataClass
     }
 
     function getChildCats(){
-        global $db;
         $cId = $this->categoryData['cat_id'];
         $sql = "SELECT * FROM category WHERE parent_id='".$cId."'";
-        $childCats = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $childCats = querySQLandImg($sql, true, false);
         return $childCats;
     }
 
     function getParentCats(){
-        global $db;
         if($this->categoryData['parent_id']){
             $sql = "SELECT * FROM category WHERE cat_id='".$this->parent_id."'";
-            $res_parentCats = $db->query($sql);
-            if($res_parentCats){
-                $parentCats = $res_parentCats->fetchAll(PDO::FETCH_ASSOC);
-            }
+            $parentCats = querySQLandImg($sql, true, false);
             return $parentCats;
         }
     }
     public function getNeighborCats(){
-        global $db;
         $sql = "SELECT * FROM category WHERE parent_id='".$this->parent_id."'";
-        $childCats = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        return $childCats;
+        $neighborCats = querySQLandImg($sql, true, false);
+
+        return $neighborCats;
+    }
+
+    // сделать с пагинацией + проверка ссылки!
+    public function getProds($cId)
+    {
+        $sql = "SELECT * FROM products WHERE category_id='".$cId."'";
+        $prods = querySQLandImg($sql, true, true);
+
+        return $prods;
     }
 
 }

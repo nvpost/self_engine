@@ -1,6 +1,6 @@
 <?php
 
-function drowShowcaseProduct($item){
+function drowShowcaseProduct($item, $catalog_class="col-sm-6 col-lg-3"){
     //deb($item);
     global $home_url;
     $product_link = $home_url."noz/".str_replace([' ', '.'], ['_', ''], $item['name']);
@@ -9,8 +9,11 @@ function drowShowcaseProduct($item){
     $img = $item['img'][0];
 
 
+$wrapper_item_class = "col-12 col-sm-4 prod-item-col";
+
 
 $productHtml = "
+<div class='{$catalog_class}'>
     <div class='product-item'>
         <ul class='product-icon-top'>
             <li><a href='#'><i class='fa fa-refresh' aria-hidden='true'></i></a></li>
@@ -31,7 +34,8 @@ $productHtml = "
                 <li>Производитель: <span>{$item['vendor']}</span></li>
             </ul>
         </div>
-    </div>   
+    </div> 
+</div>      
 ";
 return $productHtml;
 }

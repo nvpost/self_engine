@@ -1,7 +1,7 @@
 <?php
 
 function drowCategoryBar($item){
-
+    global $home_url;
     $n = rand(0, count($item['prods'])-1);
     $img = $item['prods'][$n]['img'][0]['src'];
     $category_bar_html ="<div class='slide-categ-bicycle'>
@@ -9,7 +9,7 @@ function drowCategoryBar($item){
                     <img src='img/".$img."' alt='category'>
                     <div class='categ-bicycle-info'>
                         <h4 class='title'>{$item['label']}</h4>
-                        <a href='shop.html' class='btn'><span>Перейти</span></a>
+                        <a href='{$home_url}category/{$item['label']}' class='btn'><span>Перейти</span></a>
                     </div>
                 </div>
             </div>";
