@@ -16,6 +16,12 @@ class CategoryDataClass
     public $parentCats; //array
     public $neighbor; //array
     public $prods; //array
+    public $prodsCount;
+
+//    Пагинация - перенести в отдельный класс
+    public $paginationOffset;
+    public $paginationPages;
+    public $paginationLimit;
 
     public function __construct($label)
     {
@@ -28,6 +34,11 @@ class CategoryDataClass
         $this->parentCats = $this->getParentCats();
         $this->neighbor = $this->getNeighborCats();
         $this->prods = $this->getProds($this->categoryData['cat_id']);
+        $this->prodsCount = $this->getProdsCount($this->categoryData['cat_id']);
+
+        $this->paginationOffset = 9;
+        $this->paginationLimit = 9;
+        $this->paginationPages = $this->getPaginationPages();
     }
 
     function getCategoryPageCat(){
@@ -63,10 +74,21 @@ class CategoryDataClass
         return $neighborCats;
     }
 
+    public function getProdsCount($cId){
+      global $db;
+      $sql = "SELECT count(*) FROM products WHERE category_id='".$cId."'";
+      $prodsCount = $db->query($sql)->fetchColumn();
+      return $prodsCount;
+    }
+
     // сделать с пагинацией + проверка ссылки!
+    public function getPaginationPages(){
+        return ceil($this->prodsCount/$this->paginationLimit);
+    }
     public function getProds($cId)
     {
-        $sql = "SELECT * FROM products WHERE category_id='".$cId."'";
+        $paginationLimit = 9;
+        $sql = "SELECT * FROM products WHERE category_id='".$cId."' LIMIT {$paginationLimit}";
         $prods = querySQLandImg($sql, true, true);
 
         return $prods;

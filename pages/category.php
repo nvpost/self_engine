@@ -19,6 +19,9 @@ $catPageData = checkClassCache($db_label, 'CategoryDataClass');
 //deb($catPageData->categoryData);
 //deb($catPageData->parentCats);
 //deb($catPageData->childCats);
+//deb("count ".$catPageData->prodsCount);
+
+
 
 
 $heatTitle = $db_label." | Интернет магазин ножей";
@@ -33,6 +36,14 @@ function drowNeighborCatsStr($item){
                     {$item['label']}
                 </a> /
             </span>";
+}
+
+function drowPaginationItem($p, $activeClass){
+
+    return "
+        <li class='pagination-item{$activeClass}'><a href=\"#\">$p</a></li>
+    ";
+
 }
 ?>
 
@@ -73,7 +84,7 @@ function drowNeighborCatsStr($item){
                 </h2>
                 <div class="shop-sort-cover">
                     <div class="sort-left">
-                        Найлено: <?=count($catPageData->prods)?> товаров
+                        Найлено: <?=$catPageData->prodsCount?> товаров (показано <?=count($catPageData->prods)?>)
                     </div>
                     <div class="sort-right">
                         <div class="sort-by">
@@ -95,9 +106,11 @@ function drowNeighborCatsStr($item){
                     <div class="row product-cover block">
                         <?php $catClass = "col-12 col-sm-4 prod-item-col";?>
                         <div class="neighborCats">
-                            <?php foreach ($catPageData->neighbor as $item):?>
-                                <?=drowNeighborCatsStr($item)?>
-                            <?php endforeach?>
+
+<!--                            --><?php //foreach ($catPageData->neighbor as $item):?>
+<!--                                --><?//=drowNeighborCatsStr($item)?>
+<!--                            --><?php //endforeach?>
+<!--                            -->
                         </div>
                         <?php foreach ($catPageData->prods as $item):?>
                             <?=drowShowcaseProduct($item, $catClass)?>
@@ -105,12 +118,12 @@ function drowNeighborCatsStr($item){
                     </div>
                     <div class="pagination-cover">
                         <ul class="pagination">
+
                             <li class="pagination-item item-prev"><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                            <li class="pagination-item active"><a href="#">1</a></li>
-                            <li class="pagination-item"><a href="#">2</a></li>
-                            <li class="pagination-item"><a href="#">3</a></li>
-                            <li class="pagination-item"><a href="#">4</a></li>
-                            <li class="pagination-item"><a href="#">5</a></li>
+                                <?php foreach (range(0, $catPageData->paginationPages) as $p):?>
+                                    <?php $activeClass=" "?>
+                                    <?=drowPaginationItem($p, $activeClass)?>
+                                <?php endforeach;?>
                             <li class="pagination-item item-next"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
