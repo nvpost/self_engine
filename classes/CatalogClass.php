@@ -26,7 +26,7 @@ class CatalogClass
         $prods = $prods_res->fetchAll(PDO::FETCH_ASSOC);
         //deb($prods);
         foreach ($prods as $k => $p){
-            $prods[$k]['img']=addImgToProd($p['prod_id']);
+            $prods[$k]['img']=addImgToProd($p['prod_id'], true);
         }
         return $prods;
     }
@@ -86,6 +86,7 @@ class CatalogClass
             $prods = $c->getProducts($catalogRow['flat_child'], $limit);
             $prodsArr[$k]['label'] = $catalogRow['label'];
             $prodsArr[$k]['prods'] = $prods;
+
         }
         return $prodsArr;
     }

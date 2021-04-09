@@ -3,8 +3,7 @@
 function drowCategoryBar($item){
 
     $n = rand(0, count($item['prods'])-1);
-
-    $img = $item['prods'][$n]['img']['src'];
+    $img = $item['prods'][$n]['img'][0]['src'];
     $category_bar_html ="<div class='slide-categ-bicycle'>
                 <div class='categ-bicycle-item'>
                     <img src='img/".$img."' alt='category'>

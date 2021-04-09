@@ -4,8 +4,11 @@ function drowShowcaseProduct($item){
     //deb($item);
     global $home_url;
     $product_link = $home_url."noz/".str_replace([' ', '.'], ['_', ''], $item['name']);
+
+    //Берем все картинки
     $img = $item['img'][0];
-    //deb($img);
+
+
 
 $productHtml = "
     <div class='product-item'>

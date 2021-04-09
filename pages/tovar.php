@@ -4,11 +4,14 @@
 <?php
 require_once 'classes/TovarDataClass.php';
 
+
 $cacheName = $_GET['noz'];
 $db_label = str_replace('_', ' ', $cacheName);
 
+
+$tovarObj = checkClassCache($cacheName, 'TovarDataClass');
 //добавить кеш
-$tovarObj = new TovarDataClass($cacheName );
+//$tovarObj = new TovarDataClass($cacheName );
 
 //deb($tovarObj->tovar);
 //deb($tovarObj->tovarCat);
