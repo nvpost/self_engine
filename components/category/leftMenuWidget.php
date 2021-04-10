@@ -19,7 +19,7 @@ function drowLeftChildMenuItem($item){
     <ul class="widgets wigets-shop">
         <li class="widget wiget-shop-category">
             <?php if($childCats):?>
-                <h5 class="title">Категории <?=$CatLabel?>:</h5>
+                <h5 class="title"><?=$CatLabel?>:</h5>
 
             <ul>
                 <?php foreach ($childCats as $item):?>
@@ -29,7 +29,7 @@ function drowLeftChildMenuItem($item){
             </ul>
             <?php endif;?>
             <?php if($neighborCats):?>
-                <h5 class="title">Категории <?=$parentLabel?>:</h5>
+                <h5 class="title">категории: <?=$parentLabel?>:</h5>
 
             <ul>
                 <?php foreach ($neighborCats as $item):?>
