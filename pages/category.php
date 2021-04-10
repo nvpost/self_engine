@@ -3,16 +3,13 @@ require_once 'classes/CategoryDataClass.php';
 require_once 'components/catalogShowcaseProduct.php';
 
 $cacheName = $_GET['cat'];
-$db_label = str_replace('_', ' ', $cacheName);
 
-
-//добавить кеш
 
 
 
 
 //название кэша и название класса
-$catPageData = checkClassCache($db_label, 'CategoryDataClass');
+$catPageData = checkClassCache($cacheName, 'CategoryDataClass');
 //deb($catPageData);
 //deb($catPageData->cat_id);
 //deb($catPageData->label);
@@ -20,12 +17,14 @@ $catPageData = checkClassCache($db_label, 'CategoryDataClass');
 //deb($catPageData->parentCats);
 //deb($catPageData->childCats);
 //deb("count ".$catPageData->prodsCount);
+//deb($catPageData->label);
+//deb($catPageData->catUrl);
+//deb($catPageData->pageNumber);
 
 
 
-
-$heatTitle = $db_label." | Интернет магазин ножей";
-$headDescr = $db_label.". Огромный выбор ножей самых известных производителей";
+$heatTitle = $catPageData->label." | Интернет магазин ножей";
+$headDescr = $catPageData->label.". Огромный выбор ножей самых известных производителей";
 
 doHeader($heatTitle, $headDescr);
 
@@ -37,11 +36,15 @@ function drowNeighborCatsStr($item){
                 </a> /
             </span>";
 }
-
+$catUrl = $catPageData->catUrl;
+//заменить url сошласно номеру
 function drowPaginationItem($p, $activeClass){
-
+    global $home_url;
+    global $catUrl;
+    $url = $home_url."category/".$catUrl."/".$p;
+    //deb($url);
     return "
-        <li class='pagination-item{$activeClass}'><a href=\"#\">$p</a></li>
+        <li class='pagination-item{$activeClass}'><a href='{$url}'>".($p+1)."</a></li>
     ";
 
 }
@@ -84,7 +87,13 @@ function drowPaginationItem($p, $activeClass){
                 </h2>
                 <div class="shop-sort-cover">
                     <div class="sort-left">
-                        Найлено: <?=$catPageData->prodsCount?> товаров (показано <?=count($catPageData->prods)?>)
+                        <?php
+                            $pn = $catPageData->pageNumber;
+                            $pl = $catPageData->paginationLimit;
+//                            deb('pn - '.$pn);
+//                            deb('pl - '.$pl);
+                        ?>
+                        Найлено: <?=$catPageData->prodsCount?> товаров ( <?=$pn*$pl ." - ". ($pn+1)*$pl?> )
                     </div>
                     <div class="sort-right">
                         <div class="sort-by">
@@ -121,7 +130,13 @@ function drowPaginationItem($p, $activeClass){
 
                             <li class="pagination-item item-prev"><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
                                 <?php foreach (range(0, $catPageData->paginationPages) as $p):?>
-                                    <?php $activeClass=" "?>
+                                    <?php
+                                    if($p+1 == $catPageData->pageNumber){
+                                        $activeClass=" active";
+                                    }else{
+                                        $activeClass="";
+                                    }
+                                    ?>
                                     <?=drowPaginationItem($p, $activeClass)?>
                                 <?php endforeach;?>
                             <li class="pagination-item item-next"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>

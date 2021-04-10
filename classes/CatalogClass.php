@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: n.balashov
- * Date: 29.03.2021
- * Time: 14:43
- */
+
 
 
 class CatalogClass

@@ -17,15 +17,17 @@ class CategoryDataClass
     public $neighbor; //array
     public $prods; //array
     public $prodsCount;
+    public $catUrl;
 
 //    Пагинация - перенести в отдельный класс
     public $paginationOffset;
     public $paginationPages;
     public $paginationLimit;
+    public $pageNumber;
 
-    public function __construct($label)
+    public function __construct($cacheName)
     {
-        $this->label = $label;
+        $this->DoUrlAndPage($cacheName);
 
         $this->categoryData = $this->getCategoryPageCat();
         $this->cat_id = $this->categoryData['cat_id'];
@@ -33,12 +35,32 @@ class CategoryDataClass
         $this->childCats = $this->getChildCats();
         $this->parentCats = $this->getParentCats();
         $this->neighbor = $this->getNeighborCats();
-        $this->prods = $this->getProds($this->categoryData['cat_id']);
-        $this->prodsCount = $this->getProdsCount($this->categoryData['cat_id']);
+
+
+
 
         $this->paginationOffset = 9;
         $this->paginationLimit = 9;
+        $this->prodsCount = $this->getProdsCount($this->categoryData['cat_id']);
         $this->paginationPages = $this->getPaginationPages();
+
+
+        $this->prods = $this->getProds($this->categoryData['cat_id']);
+    }
+
+    function DoUrlAndPage($cacheName){
+        if(strpos($cacheName, '/')){
+            $urlData = explode('/', $cacheName);
+            $this->label = str_replace('_', ' ', $urlData[0]);
+            $this->pageNumber = $urlData[1];
+            $this->catUrl = $urlData[0];
+        }else{
+            $this->label = str_replace('_', ' ', $cacheName);
+            $this->pageNumber = 0;
+            $this->$cacheName;
+        }
+        //deb($cacheName);
+        //deb('ppp - '.$this->pageNumber);
     }
 
     function getCategoryPageCat(){
@@ -87,8 +109,11 @@ class CategoryDataClass
     }
     public function getProds($cId)
     {
-        $paginationLimit = 9;
-        $sql = "SELECT * FROM products WHERE category_id='".$cId."' LIMIT {$paginationLimit}";
+        $paginationLimit = $this->paginationLimit;
+        $offset = $this->pageNumber*$paginationLimit;
+//        deb('offset - '.$offset);
+
+        $sql = "SELECT * FROM products WHERE category_id='".$cId."' LIMIT {$paginationLimit} OFFSET {$offset}";
         $prods = querySQLandImg($sql, true, true);
 
         return $prods;

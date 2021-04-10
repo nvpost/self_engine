@@ -69,7 +69,7 @@ class TovarDataClass
 
 //    related_products
 
-
+// в отдельном классе
     public function getRelatedVendor($vendor){
         global $db;
         deb($vendor);
