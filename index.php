@@ -8,9 +8,6 @@ $time_start = microtime(true);
 require './catsAndProdsShowcase.php';
 
 ?>
-<?php
-    //do header
-?>
 
 
 <!--Контент страницы-->

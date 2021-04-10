@@ -30,7 +30,6 @@ function checkCache($cacheName, $childCats = 0, $offset=0){
 }
 
 function doCatsArray($childCats, $offset){
-    echo $childCats;
     global $db;
     global $rootCats;
     global $cat_limit;
@@ -60,6 +59,7 @@ function doCatsArray($childCats, $offset){
         //$rootCats = addSecondCats($rootCats, $cats);
         //$rootCats = thirtCatArray($rootCats, $cats);
         //deb($rootCats);
+
     return $rootCats;
 
 }

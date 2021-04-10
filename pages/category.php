@@ -83,33 +83,21 @@ function drowPaginationItem($p, $activeClass){
 
             <div class="col-12 col-lg-9 shop-cover">
                 <h2 class="title">
-                    <?=$catPageData->label?>
+                    <?=$catPageData->label?>. <?=$catPageData->parentCats[0]['label'];?>
                 </h2>
                 <div class="shop-sort-cover">
                     <div class="sort-left">
                         <?php
                             $pn = $catPageData->pageNumber;
                             $pl = $catPageData->paginationLimit;
+                            $start = $pn*$pl + 1;
+                            $fin = ($pn+1)*$pl;
 //                            deb('pn - '.$pn);
 //                            deb('pl - '.$pl);
                         ?>
-                        Найлено: <?=$catPageData->prodsCount?> товаров ( <?=$pn*$pl ." - ". ($pn+1)*$pl?> )
+                        Найлено: <?=$catPageData->prodsCount?> товаров ( <?=$start ." - ". $fin?> )
                     </div>
-                    <div class="sort-right">
-                        <div class="sort-by">
-                            <span class="sort-name">sort by:</span>
-                            <select class="nice-select">
-                                <option selected="selected" disabled>best selling</option>
-                                <option>new product</option>
-                                <option>sale product</option>
-                            </select>
-                        </div>
-                        <ul class="sort-form">
-                            <li data-atr="large"><i class="fa fa-th-large" aria-hidden="true"></i></li>
-                            <li data-atr="block" class="active"><i class="fa fa-th" aria-hidden="true"></i></li>
-                            <li data-atr="list"><i class="fa fa-list" aria-hidden="true"></i></li>
-                        </ul>
-                    </div>
+
                 </div>
                 <div class="shop-product-cover">
                     <div class="row product-cover block">

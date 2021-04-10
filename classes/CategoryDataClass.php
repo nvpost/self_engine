@@ -57,7 +57,7 @@ class CategoryDataClass
         }else{
             $this->label = str_replace('_', ' ', $cacheName);
             $this->pageNumber = 0;
-            $this->$cacheName;
+            $this->catUrl = $cacheName;
         }
         //deb($cacheName);
         //deb('ppp - '.$this->pageNumber);
