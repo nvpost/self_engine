@@ -7,6 +7,7 @@ $time_start = microtime(true);
 //    require_once 'func.php';
 require './catsAndProdsShowcase.php';
 
+c_deb('git');
 ?>
 
 
