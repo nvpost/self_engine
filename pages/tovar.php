@@ -2,13 +2,14 @@
 
 
 <?php
+require_once 'classes/TimeLogClass.php';
 require_once 'classes/TovarDataClass.php';
 
 
 $cacheName = $_GET['noz'];
 $db_label = str_replace('_', ' ', $cacheName);
 
-
+$t = new TimeLogClass('tovarClass');
 $tovarObj = checkClassCache($cacheName, 'TovarDataClass');
 //добавить кеш
 //$tovarObj = new TovarDataClass($cacheName );
@@ -35,6 +36,7 @@ if(strlen($headDescr)>180){
 
 doHeader($heatTitle, $headDescr);
 
+$t->timerStop();
 ?>
 
 
@@ -44,10 +46,13 @@ doHeader($heatTitle, $headDescr);
 
 <!-- ================ HEADER-TITLE ================ -->
 <?php
+$t=new TimeLogClass('tovarBread');
     $p_cat = $tovarObj->parentCat;
     $current_cat = $tovarObj->tovarCat;
     $name = $tovarObj->tovarName;
-    require_once "components/tovar/headBreadcrambs.php"
+    require_once "components/tovar/headBreadcrambs.php";
+
+$t->timerStop();
 ?>
 <!-- ============== HEADER-TITLE END ============== -->
 
@@ -57,8 +62,10 @@ doHeader($heatTitle, $headDescr);
         <div class="row">
             <!--===== SLIDER-SINGLE-FOR =====-->
             <?php
+            $t=new TimeLogClass('tovarSlider');
                 $tovar = $tovarObj->tovar;
                 require_once 'components/tovar/tovarSlider.php';
+                $t->timerStop();
             ?>
             <!--=== SLIDER-SINGLE-FOR END ===-->
 
@@ -81,9 +88,11 @@ doHeader($heatTitle, $headDescr);
 <!--=============== RELATED PRODUCTS ===============-->
 <section class="s-related-products">
     <?php
+    $t = new TimeLogClass('related');
         $parent_cat_id = $tovarObj->parentCat['cat_id'];
         $cat_label = $tovarObj->parentCat['label'];
         require_once "components/tovar/relatedProducts.php";
+    $t->timerStop();
     ?>
 </section>
 <!--============= RELATED PRODUCTS END =============-->

@@ -3,7 +3,26 @@
 require_once 'classes/RelatedProductsClass.php';
 require_once 'components/catalogShowcaseProduct.php';
 
-$relatedProducts = new RelatedProductsClass($tovar, $parent_cat_id, $cat_label);
+//$relatedProducts = new RelatedProductsClass($tovar, $parent_cat_id, $cat_label);
+//deb($tovar['name'].'_related');
+$cacheName = $tovar['name'].'_related';
+
+
+function checkRelatedProductsCache($cacheName){
+    global $tovar, $parent_cat_id, $cat_label;
+    $dataCache = new DataCache($cacheName);
+    $getDataFromCache = $dataCache->initCacheData();
+
+    if ($getDataFromCache) {
+        $relatedProducts = $dataCache->getCacheData();
+    }else{
+        $relatedProducts = new RelatedProductsClass($tovar, $parent_cat_id, $cat_label);
+        //     Обновляем данные в кэше
+        $dataCache->updateCacheData($relatedProducts);
+    }
+    return $relatedProducts;
+}
+$relatedProducts = checkRelatedProductsCache($cacheName);
 
 $relatedVendorProducts = $relatedProducts->getRelatedVendor();
 

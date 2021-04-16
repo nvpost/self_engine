@@ -4,10 +4,11 @@
 <?php
 ini_set('error_reporting', E_ALL);
 $time_start = microtime(true);
+require_once 'classes/TimeLogClass.php';
 //    require_once 'func.php';
+$t = new TimeLogClass('first_init');
 require './catsAndProdsShowcase.php';
-
-c_deb('git');
+$t ->timerStop();
 ?>
 
 
@@ -29,6 +30,9 @@ c_deb('git');
     ?>
 
 	<!--==================== FOOTER ====================-->
+<?php
+$t = new TimeLogClass('footer')
+?>
 	<footer>
 		<div class="container">
 			<div class="row footer-item-cover">
@@ -102,7 +106,9 @@ c_deb('git');
 	<script src="http://localhost/noz_template/assets/js/wow.js"></script>
 	<script src="http://localhost/noz_template/assets/js/lazyload.min.js"></script>
 	<script src="http://localhost/noz_template/assets/js/scripts.js"></script>
-
+<?php
+$t->timerStop();
+?>
 
 <?php
 $time_log = 't: '.round(microtime(true) - $time_start, 4).'s.';

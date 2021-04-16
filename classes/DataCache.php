@@ -23,6 +23,7 @@ class DataCache
     #-------------------------------------
     public function __construct($dataName)
     {
+        global $home_url;
 //        if (defined('SiteSettings::dataCacheEnabled') && SiteSettings::dataCacheEnabled === true) {
 //            $this->setCacheOn();
 //        } else {
@@ -35,13 +36,15 @@ class DataCache
 //            $this->setCacheTime(self::DEFAULT_CACHE_TIME);
 //        }
 //        $this->setCacheTime = 600;
-        $this->cacheTime = 1;
+        $this->cacheTime = 600;
 //        if (defined('SiteSettings::dataCacheFolder') && !empty(SiteSettings::dataCacheFolder)) {
 //            $this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] . SiteSettings::dataCacheFolder;
 //        } else {
 //            $this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] . self::DEFAULT_CACHE_PATH;
 //        }
-        $this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] .'/noz_self/cache_data/';
+        $this->cacheFolder = $_SERVER['DOCUMENT_ROOT'].$home_url.'cache_data/';
+        //deb($this->cacheFolder);
+        //$this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] .'/noz_self/cache_data/';
         //$this->cacheFolder = $_SERVER['DOCUMENT_ROOT'] .'/noz_self/self_engine/cache_data/';
         //deb($this->cacheFolder);
         $this->dataName = $dataName;
@@ -105,7 +108,8 @@ class DataCache
             echo 'empty';
             return false;
         } else {
-           // deb('return');
+           //deb('данные из кеш');
+            c_deb('from_cache');
             return unserialize($this->cache);
         }
     }
@@ -117,6 +121,7 @@ class DataCache
         if (!$this->cacheEnabled) { return false; }
         $this->cache = $newData;
         $output = serialize($this->cache);
+        c_deb('set new cache');
         if(!@file_exists($this->cacheFullFilePath)) { @mkdir($this->cacheFullFilePath, 0777, true); }
         $fp = @fopen($this->cacheFullFileName, "w");
         @fwrite($fp, $output);

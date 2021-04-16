@@ -10,9 +10,6 @@ function checkCache($cacheName, $childCats = 0, $offset=0){
     // Название кеша - каталог с количеством
     $dataCache = new DataCache($cacheName);
     $getDataFromCache = $dataCache->initCacheData();
-//    deb($cacheName, 1);
-//    deb($childCats, 1);
-//    deb($offset, 1);
 
     if ($getDataFromCache) {
         // Получаем кэшированные данные из кэша

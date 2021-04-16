@@ -222,7 +222,7 @@ function checkClassCache($cacheName, $className){
         // Получаем кэшированные данные из кэша
         //echo "из cache";
         $catPageData = $dataCache->getCacheData();
-        //deb($products);
+        //deb($catPageData);
     } else {
         // Исполняем этот код, если кеширование отключено или данные в кеше старые
         //echo "Новый список товаров";
